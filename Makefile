@@ -5,7 +5,7 @@
 # ---------------------------------------------------------------------------
 
 .PHONY: help install dev-api dev-web test lint format typecheck build \
-        up down logs ps migrate revision seed cleanup reset
+        up down logs ps migrate revision seed cleanup reset benchmark
 
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | \
@@ -23,6 +23,9 @@ dev-web: ## Run the Next.js dev server on :3000
 
 test: ## Run backend tests
 	cd backend && uv run pytest -q
+
+benchmark: ## Run the deterministic accuracy benchmark and refresh the report
+	cd backend && uv run python -m scripts.benchmark --markdown ../docs/trustscan/BENCHMARK-REPORT.md
 
 lint: ## Lint backend and frontend
 	cd backend && uv run ruff check app tests scripts

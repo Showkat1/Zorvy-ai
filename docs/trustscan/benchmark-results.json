@@ -1,0 +1,621 @@
+{
+  "generated_at": "2026-11-18T14:26:14+00:00",
+  "metrics": {
+    "cases": 20,
+    "level_accuracy": 1.0,
+    "ordinal_accuracy": 1.0,
+    "macrolevel_f1": 1.0,
+    "signal_precision": 0.5424,
+    "signal_recall": 0.8205,
+    "signal_f1": 0.6531,
+    "signal_expected": 39,
+    "signal_found": 32,
+    "signal_predicted": 59,
+    "dangerous_misses": 0,
+    "false_alarms": 0,
+    "latency_mean_ms": 1.241,
+    "latency_p50_ms": 0.588,
+    "latency_p95_ms": 2.699,
+    "latency_max_ms": 8.966,
+    "confusion": {
+      "LOW": {
+        "LOW": 5,
+        "MEDIUM": 0,
+        "HIGH": 0,
+        "CRITICAL": 0
+      },
+      "MEDIUM": {
+        "LOW": 0,
+        "MEDIUM": 1,
+        "HIGH": 0,
+        "CRITICAL": 0
+      },
+      "HIGH": {
+        "LOW": 0,
+        "MEDIUM": 0,
+        "HIGH": 12,
+        "CRITICAL": 0
+      },
+      "CRITICAL": {
+        "LOW": 0,
+        "MEDIUM": 0,
+        "HIGH": 0,
+        "CRITICAL": 2
+      }
+    },
+    "per_level": {
+      "LOW": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 5
+      },
+      "MEDIUM": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 1
+      },
+      "HIGH": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 12
+      },
+      "CRITICAL": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 2
+      }
+    },
+    "per_category": {
+      "ambiguous": {
+        "cases": 1,
+        "level_accuracy": 1.0,
+        "signal_expected": 0,
+        "signal_recall": 0.0
+      },
+      "benign": {
+        "cases": 4,
+        "level_accuracy": 1.0,
+        "signal_expected": 0,
+        "signal_recall": 0.0
+      },
+      "government_impersonation": {
+        "cases": 1,
+        "level_accuracy": 1.0,
+        "signal_expected": 2,
+        "signal_recall": 1.0
+      },
+      "impersonation": {
+        "cases": 1,
+        "level_accuracy": 1.0,
+        "signal_expected": 3,
+        "signal_recall": 0.6667
+      },
+      "investment_scam": {
+        "cases": 1,
+        "level_accuracy": 1.0,
+        "signal_expected": 3,
+        "signal_recall": 1.0
+      },
+      "job_scam": {
+        "cases": 1,
+        "level_accuracy": 1.0,
+        "signal_expected": 2,
+        "signal_recall": 1.0
+      },
+      "phishing": {
+        "cases": 5,
+        "level_accuracy": 1.0,
+        "signal_expected": 16,
+        "signal_recall": 0.8125
+      },
+      "prize_scam": {
+        "cases": 1,
+        "level_accuracy": 1.0,
+        "signal_expected": 3,
+        "signal_recall": 1.0
+      },
+      "scam": {
+        "cases": 3,
+        "level_accuracy": 1.0,
+        "signal_expected": 7,
+        "signal_recall": 0.5714
+      },
+      "social_engineering": {
+        "cases": 2,
+        "level_accuracy": 1.0,
+        "signal_expected": 3,
+        "signal_recall": 1.0
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "TC01",
+      "name": "Fake Bank OTP",
+      "category": "phishing",
+      "expected_level": "CRITICAL",
+      "actual_level": "CRITICAL",
+      "score": 100,
+      "expected_signals": [
+        "advance_payment",
+        "artificial_urgency",
+        "credential_request",
+        "suspicious_url"
+      ],
+      "detected_signals": [
+        "advance_payment",
+        "artificial_urgency",
+        "credential_request",
+        "phishing",
+        "social_engineering",
+        "suspicious_url",
+        "url_present"
+      ],
+      "missing_signals": [],
+      "unexpected_signals": [
+        "phishing",
+        "social_engineering",
+        "url_present"
+      ],
+      "url_count": 1,
+      "latency_ms": 8.966,
+      "level_correct": true
+    },
+    {
+      "id": "TC02",
+      "name": "Fake Government Grant",
+      "category": "government_impersonation",
+      "expected_level": "HIGH",
+      "actual_level": "HIGH",
+      "score": 70,
+      "expected_signals": [
+        "advance_payment",
+        "government_impersonation"
+      ],
+      "detected_signals": [
+        "advance_payment",
+        "credential_request",
+        "government_impersonation",
+        "impersonation",
+        "job_scam"
+      ],
+      "missing_signals": [],
+      "unexpected_signals": [
+        "credential_request",
+        "impersonation",
+        "job_scam"
+      ],
+      "url_count": 0,
+      "latency_ms": 2.699,
+      "level_correct": true
+    },
+    {
+      "id": "TC03",
+      "name": "Fake Job Registration",
+      "category": "job_scam",
+      "expected_level": "HIGH",
+      "actual_level": "HIGH",
+      "score": 51,
+      "expected_signals": [
+        "advance_payment",
+        "job_scam"
+      ],
+      "detected_signals": [
+        "advance_payment",
+        "job_scam",
+        "prize_scam"
+      ],
+      "missing_signals": [],
+      "unexpected_signals": [
+        "prize_scam"
+      ],
+      "url_count": 0,
+      "latency_ms": 0.861,
+      "level_correct": true
+    },
+    {
+      "id": "TC04",
+      "name": "Investment Scam",
+      "category": "investment_scam",
+      "expected_level": "HIGH",
+      "actual_level": "HIGH",
+      "score": 62,
+      "expected_signals": [
+        "advance_payment",
+        "artificial_urgency",
+        "investment_scam"
+      ],
+      "detected_signals": [
+        "advance_payment",
+        "artificial_urgency",
+        "investment_scam",
+        "social_engineering"
+      ],
+      "missing_signals": [],
+      "unexpected_signals": [
+        "social_engineering"
+      ],
+      "url_count": 0,
+      "latency_ms": 0.628,
+      "level_correct": true
+    },
+    {
+      "id": "TC05",
+      "name": "Fake Prize",
+      "category": "prize_scam",
+      "expected_level": "HIGH",
+      "actual_level": "HIGH",
+      "score": 70,
+      "expected_signals": [
+        "advance_payment",
+        "artificial_urgency",
+        "prize_scam"
+      ],
+      "detected_signals": [
+        "advance_payment",
+        "artificial_urgency",
+        "job_scam",
+        "prize_scam",
+        "social_engineering"
+      ],
+      "missing_signals": [],
+      "unexpected_signals": [
+        "job_scam",
+        "social_engineering"
+      ],
+      "url_count": 0,
+      "latency_ms": 0.845,
+      "level_correct": true
+    },
+    {
+      "id": "TC06",
+      "name": "Shortened Suspicious URL",
+      "category": "phishing",
+      "expected_level": "HIGH",
+      "actual_level": "HIGH",
+      "score": 50,
+      "expected_signals": [
+        "credential_request",
+        "suspicious_url"
+      ],
+      "detected_signals": [
+        "phishing",
+        "suspicious_url",
+        "url_present"
+      ],
+      "missing_signals": [
+        "credential_request"
+      ],
+      "unexpected_signals": [
+        "phishing",
+        "url_present"
+      ],
+      "url_count": 1,
+      "latency_ms": 2.681,
+      "level_correct": true
+    },
+    {
+      "id": "TC07",
+      "name": "Brand Impersonation",
+      "category": "impersonation",
+      "expected_level": "HIGH",
+      "actual_level": "HIGH",
+      "score": 68,
+      "expected_signals": [
+        "artificial_urgency",
+        "impersonation",
+        "suspicious_url"
+      ],
+      "detected_signals": [
+        "artificial_urgency",
+        "phishing",
+        "suspicious_url",
+        "url_present"
+      ],
+      "missing_signals": [
+        "impersonation"
+      ],
+      "unexpected_signals": [
+        "phishing",
+        "url_present"
+      ],
+      "url_count": 1,
+      "latency_ms": 1.194,
+      "level_correct": true
+    },
+    {
+      "id": "TC08",
+      "name": "Fake Login Page",
+      "category": "phishing",
+      "expected_level": "HIGH",
+      "actual_level": "HIGH",
+      "score": 92,
+      "expected_signals": [
+        "credential_request",
+        "suspicious_url"
+      ],
+      "detected_signals": [
+        "credential_request",
+        "phishing",
+        "suspicious_url",
+        "url_present"
+      ],
+      "missing_signals": [],
+      "unexpected_signals": [
+        "phishing",
+        "url_present"
+      ],
+      "url_count": 1,
+      "latency_ms": 0.863,
+      "level_correct": true
+    },
+    {
+      "id": "TC09",
+      "name": "Urgent Payment Request",
+      "category": "social_engineering",
+      "expected_level": "HIGH",
+      "actual_level": "HIGH",
+      "score": 57,
+      "expected_signals": [
+        "advance_payment",
+        "artificial_urgency"
+      ],
+      "detected_signals": [
+        "advance_payment",
+        "artificial_urgency",
+        "phishing",
+        "social_engineering"
+      ],
+      "missing_signals": [],
+      "unexpected_signals": [
+        "phishing",
+        "social_engineering"
+      ],
+      "url_count": 0,
+      "latency_ms": 0.508,
+      "level_correct": true
+    },
+    {
+      "id": "TC10",
+      "name": "Fake KYC Request",
+      "category": "phishing",
+      "expected_level": "HIGH",
+      "actual_level": "HIGH",
+      "score": 70,
+      "expected_signals": [
+        "artificial_urgency",
+        "credential_request",
+        "phishing"
+      ],
+      "detected_signals": [
+        "artificial_urgency",
+        "credential_request",
+        "impersonation",
+        "social_engineering"
+      ],
+      "missing_signals": [
+        "phishing"
+      ],
+      "unexpected_signals": [
+        "impersonation",
+        "social_engineering"
+      ],
+      "url_count": 0,
+      "latency_ms": 0.311,
+      "level_correct": true
+    },
+    {
+      "id": "TC11",
+      "name": "Social Engineering",
+      "category": "social_engineering",
+      "expected_level": "MEDIUM",
+      "actual_level": "MEDIUM",
+      "score": 30,
+      "expected_signals": [
+        "credential_request"
+      ],
+      "detected_signals": [
+        "credential_request"
+      ],
+      "missing_signals": [],
+      "unexpected_signals": [],
+      "url_count": 0,
+      "latency_ms": 0.464,
+      "level_correct": true
+    },
+    {
+      "id": "TC12",
+      "name": "Suspicious WhatsApp Message",
+      "category": "scam",
+      "expected_level": "HIGH",
+      "actual_level": "HIGH",
+      "score": 63,
+      "expected_signals": [
+        "advance_payment",
+        "artificial_urgency"
+      ],
+      "detected_signals": [
+        "advance_payment",
+        "credential_request"
+      ],
+      "missing_signals": [
+        "artificial_urgency"
+      ],
+      "unexpected_signals": [
+        "credential_request"
+      ],
+      "url_count": 0,
+      "latency_ms": 0.559,
+      "level_correct": true
+    },
+    {
+      "id": "TC13",
+      "name": "Legitimate Bank Notification",
+      "category": "benign",
+      "expected_level": "LOW",
+      "actual_level": "LOW",
+      "score": 2,
+      "expected_signals": [],
+      "detected_signals": [],
+      "missing_signals": [],
+      "unexpected_signals": [],
+      "url_count": 0,
+      "latency_ms": 0.514,
+      "level_correct": true
+    },
+    {
+      "id": "TC14",
+      "name": "Legitimate Government Communication",
+      "category": "benign",
+      "expected_level": "LOW",
+      "actual_level": "LOW",
+      "score": 0,
+      "expected_signals": [],
+      "detected_signals": [],
+      "missing_signals": [],
+      "unexpected_signals": [],
+      "url_count": 0,
+      "latency_ms": 0.518,
+      "level_correct": true
+    },
+    {
+      "id": "TC15",
+      "name": "Legitimate Job Advertisement",
+      "category": "benign",
+      "expected_level": "LOW",
+      "actual_level": "LOW",
+      "score": 8,
+      "expected_signals": [],
+      "detected_signals": [
+        "job_scam"
+      ],
+      "missing_signals": [],
+      "unexpected_signals": [
+        "job_scam"
+      ],
+      "url_count": 0,
+      "latency_ms": 0.505,
+      "level_correct": true
+    },
+    {
+      "id": "TC16",
+      "name": "Ambiguous Message",
+      "category": "ambiguous",
+      "expected_level": "LOW",
+      "actual_level": "LOW",
+      "score": 0,
+      "expected_signals": [],
+      "detected_signals": [],
+      "missing_signals": [],
+      "unexpected_signals": [],
+      "url_count": 0,
+      "latency_ms": 0.417,
+      "level_correct": true
+    },
+    {
+      "id": "TC17",
+      "name": "Roman Urdu Scam",
+      "category": "scam",
+      "expected_level": "HIGH",
+      "actual_level": "HIGH",
+      "score": 63,
+      "expected_signals": [
+        "advance_payment",
+        "artificial_urgency",
+        "credential_request"
+      ],
+      "detected_signals": [
+        "advance_payment",
+        "credential_request"
+      ],
+      "missing_signals": [
+        "artificial_urgency"
+      ],
+      "unexpected_signals": [],
+      "url_count": 0,
+      "latency_ms": 0.464,
+      "level_correct": true
+    },
+    {
+      "id": "TC18",
+      "name": "Urdu Scam",
+      "category": "scam",
+      "expected_level": "HIGH",
+      "actual_level": "HIGH",
+      "score": 54,
+      "expected_signals": [
+        "advance_payment",
+        "credential_request"
+      ],
+      "detected_signals": [
+        "artificial_urgency",
+        "credential_request",
+        "social_engineering"
+      ],
+      "missing_signals": [
+        "advance_payment"
+      ],
+      "unexpected_signals": [
+        "artificial_urgency",
+        "social_engineering"
+      ],
+      "url_count": 0,
+      "latency_ms": 0.474,
+      "level_correct": true
+    },
+    {
+      "id": "TC19",
+      "name": "Multi-Signal Fraud",
+      "category": "phishing",
+      "expected_level": "CRITICAL",
+      "actual_level": "CRITICAL",
+      "score": 100,
+      "expected_signals": [
+        "advance_payment",
+        "artificial_urgency",
+        "credential_request",
+        "phishing",
+        "suspicious_url"
+      ],
+      "detected_signals": [
+        "advance_payment",
+        "artificial_urgency",
+        "credential_request",
+        "impersonation",
+        "social_engineering",
+        "suspicious_url",
+        "url_present"
+      ],
+      "missing_signals": [
+        "phishing"
+      ],
+      "unexpected_signals": [
+        "impersonation",
+        "social_engineering",
+        "url_present"
+      ],
+      "url_count": 1,
+      "latency_ms": 0.723,
+      "level_correct": true
+    },
+    {
+      "id": "TC20",
+      "name": "Benign Suspicious Keywords",
+      "category": "benign",
+      "expected_level": "LOW",
+      "actual_level": "LOW",
+      "score": 0,
+      "expected_signals": [],
+      "detected_signals": [],
+      "missing_signals": [],
+      "unexpected_signals": [],
+      "url_count": 0,
+      "latency_ms": 0.617,
+      "level_correct": true
+    }
+  ]
+}

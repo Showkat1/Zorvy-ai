@@ -31,8 +31,10 @@ distribution and the corpus that no vendor can buy.
 | 05 | [Economics & GTM](05-ECONOMICS-AND-GTM.md) | Pricing, margins, and how institutions get sold | Founder, investor |
 | 06 | [Investor & Acquisition Readiness](06-INVESTOR-AND-ACQUISITION-READINESS.md) | Data room, buyer map, valuation | Founder, banker |
 | 07 | [Risk Register](07-RISK-REGISTER.md) | What kills this, and the tripwires | Founder, board |
+| 08 | [Seed Readiness](08-SEED-READINESS.md) | What is verifiable today, what is missing, and the next milestone | Founder, seed investor |
 
-**Reading paths:** investor → 01, 02, 05, 06 · acquirer → 06, 02, 03 · engineer → 03, 04.
+**Reading paths:** seed investor → 08, 01, 02, 05, 06 · investor → 01, 02, 05, 06 ·
+acquirer → 06, 02, 03 · engineer → 03, 04.
 
 ---
 

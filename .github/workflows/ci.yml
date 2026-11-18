@@ -43,6 +43,9 @@ jobs:
           TRUSTSCAN_LLM_ENABLED: "false"
           TRUSTSCAN_EMBEDDING_PROVIDER: hash
 
+      - name: Benchmark
+        run: uv run python -m scripts.benchmark --json "$RUNNER_TEMP/benchmark-results.json"
+
   frontend:
     name: Frontend (lint + types + build)
     runs-on: ubuntu-latest

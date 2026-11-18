@@ -25,6 +25,7 @@ usable for demos, offline testing and evaluation.
 - [Risk model](#risk-model)
 - [API surface](#api-surface)
 - [Testing](#testing)
+- [Investor materials](#investor-materials)
 - [Production checklist](#production-checklist)
 - [Legacy Streamlit MVP](#legacy-streamlit-mvp)
 - [Disclaimer](#disclaimer)
@@ -97,7 +98,7 @@ presented as proof of safety.
 | Auth | Argon2 (`pwdlib`), short-lived JWT access tokens, httpOnly refresh cookie |
 | RAG | pgvector / cosine fallback, `openai`, `sentence-transformers` or deterministic `hash` embeddings |
 | LLM | OpenAI-compatible client (OpenRouter by default) with heuristic fallback |
-| Extraction | PyMuPDF, Pillow, pytesseract |
+| Extraction | pypdf, Pillow, pytesseract |
 | Observability | structlog (JSON in containers), request IDs, health/readiness probes |
 | Delivery | Docker multi-stage builds, Docker Compose, GitHub Actions CI |
 
@@ -115,7 +116,7 @@ trustscan-ai/
 │   │   ├── schemas/         Pydantic contracts
 │   │   └── services/        pipeline, extraction, URL intel, RAG, LLM, risk, device scan
 │   ├── migrations/          Alembic environment + initial schema
-│   ├── scripts/             seed_knowledge, seed_demo, cleanup
+│   ├── scripts/             seed_knowledge, seed_demo, cleanup, benchmark
 │   ├── tests/               pytest suite (API + domain)
 │   ├── Dockerfile
 │   └── pyproject.toml / uv.lock
@@ -334,6 +335,30 @@ cd frontend && npm run build
 The suite covers authentication and session rotation, investigation lifecycle, evidence
 extraction, URL intelligence, correlation, the risk engine (including independent-evidence
 gating), device-scan scoring and ownership isolation, and the full evaluation dataset.
+
+Reproduce the accuracy benchmark and refresh the published report:
+
+```bash
+make benchmark
+```
+
+---
+
+## Investor materials
+
+The commercialisation strategy and the evidence pack live in [`docs/trustscan/`](docs/trustscan/):
+
+| Document | Use |
+| --- | --- |
+| [`08-SEED-READINESS.md`](docs/trustscan/08-SEED-READINESS.md) | Start here for a seed conversation: what is verifiable, what is missing, demo script, claims to avoid |
+| [`BENCHMARK-REPORT.md`](docs/trustscan/BENCHMARK-REPORT.md) | Generated accuracy, confusion, signal and latency results with stated limits |
+| [`benchmark-results.json`](docs/trustscan/benchmark-results.json) | Per-case machine-readable results |
+| [`01`](docs/trustscan/01-MASTER-THESIS.md)–[`07`](docs/trustscan/07-RISK-REGISTER.md) | Thesis, market, product, roadmap, economics, diligence, risk |
+
+The benchmark is deterministic and offline: the same commit produces the same verdicts. It is a
+specification-conformance measure over a small labelled suite, not a claim of field accuracy.
+
+TrustScan is proprietary software. See [`LICENSE`](LICENSE) and [`SECURITY.md`](SECURITY.md).
 
 ---
 
