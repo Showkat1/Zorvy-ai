@@ -2,6 +2,7 @@ import {
   ArrowRight,
   BookOpenCheck,
   BrainCircuit,
+  Check,
   FileSearch,
   Fingerprint,
   Link2,
@@ -69,6 +70,48 @@ const BANDS = [
   { level: "Critical", range: "80–100", tone: "rose" as const },
 ];
 
+const PRICING = [
+  {
+    name: "Free",
+    price: "Free",
+    blurb: "For occasional checks on a message that feels off.",
+    features: [
+      "5 investigations per month",
+      "3 device scans per month",
+      "Full evidence report",
+      "Protection guidance",
+    ],
+    cta: "Create a free account",
+    featured: false,
+  },
+  {
+    name: "Pro",
+    price: "₹499",
+    blurb: "For investigators, freelancers and small teams.",
+    features: [
+      "Unlimited investigations",
+      "30 device scans per month",
+      "JSON report export",
+      "Priority processing",
+    ],
+    cta: "Start with Pro",
+    featured: true,
+  },
+  {
+    name: "Standard",
+    price: "₹1,999",
+    blurb: "For teams that need volume and programmatic access.",
+    features: [
+      "Unlimited investigations",
+      "Unlimited device scans",
+      "JSON report export",
+      "API access",
+    ],
+    cta: "Talk to us",
+    featured: false,
+  },
+];
+
 export default function LandingPage() {
   return (
     <div className="relative overflow-hidden">
@@ -86,6 +129,9 @@ export default function LandingPage() {
             </a>
             <a href="#capabilities" className="transition-colors hover:text-foreground">
               Capabilities
+            </a>
+            <a href="#pricing" className="transition-colors hover:text-foreground">
+              Pricing
             </a>
             <a href="#risk" className="transition-colors hover:text-foreground">
               Risk engine
@@ -282,6 +328,67 @@ export default function LandingPage() {
                 <p className="mt-1.5 text-xs leading-relaxed text-muted">{item.copy}</p>
               </div>
             ))}
+          </div>
+        </section>
+
+        <section id="pricing" className="mx-auto w-full max-w-7xl px-5 py-20">
+          <div className="mx-auto w-full max-w-7xl px-5 py-20">
+            <div className="max-w-2xl">
+              <Badge tone="teal">Pricing</Badge>
+              <h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
+                Start free. Upgrade when it earns it.
+              </h2>
+              <p className="mt-3 text-sm leading-relaxed text-muted">
+                Every plan includes the same evidence-grounded engine. Paid plans raise the limits
+                and unlock export — no per-report credits, no surprise metering.
+              </p>
+            </div>
+            <div className="mt-10 grid gap-4 lg:grid-cols-3">
+              {PRICING.map((tier) => (
+                <div
+                  key={tier.name}
+                  className={`relative flex flex-col rounded-xl border p-6 ${
+                    tier.featured
+                      ? "border-teal-400/40 bg-gradient-to-b from-teal-400/[0.08] to-card/60"
+                      : "border-border bg-card/60"
+                  }`}
+                >
+                  {tier.featured ? (
+                    <Badge tone="teal" className="absolute -top-2.5 left-6">
+                      Most popular
+                    </Badge>
+                  ) : null}
+                  <h3 className="text-sm font-semibold text-foreground">{tier.name}</h3>
+                  <p className="mt-1 text-xs leading-relaxed text-muted">{tier.blurb}</p>
+                  <p className="mt-4 flex items-baseline gap-1 text-3xl font-semibold tracking-tight text-foreground">
+                    {tier.price}
+                    {tier.price !== "Free" ? (
+                      <span className="text-xs font-normal text-faint">/month</span>
+                    ) : null}
+                  </p>
+                  <ul className="mt-5 space-y-2 text-xs leading-relaxed text-muted">
+                    {tier.features.map((feature) => (
+                      <li key={feature} className="flex items-start gap-2">
+                        <Check className="mt-0.5 size-3.5 shrink-0 text-teal-400" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <Button
+                    asChild
+                    variant={tier.featured ? "primary" : "secondary"}
+                    size="sm"
+                    className="mt-6 w-full"
+                  >
+                    <Link href="/register">{tier.cta}</Link>
+                  </Button>
+                </div>
+              ))}
+            </div>
+            <p className="mt-6 text-[11px] text-faint">
+              Prices in INR. Payments by Razorpay (UPI Autopay, cards, netbanking). Cancel any time
+              from Settings.
+            </p>
           </div>
         </section>
 

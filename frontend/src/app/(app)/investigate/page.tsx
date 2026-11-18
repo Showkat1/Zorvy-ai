@@ -28,7 +28,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
-import { api, errorMessage } from "@/lib/api";
+import { api, ApiError, errorMessage } from "@/lib/api";
 import type { InputType } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
@@ -123,7 +123,13 @@ export default function InvestigatePage() {
       toast.success("Investigation started");
       router.push(`/investigations/${response.id}`);
     } catch (error) {
-      toast.error(errorMessage(error));
+      if (error instanceof ApiError && error.code === "payment_required") {
+        toast.error(errorMessage(error), {
+          action: { label: "Upgrade", onClick: () => router.push("/settings#billing") },
+        });
+      } else {
+        toast.error(errorMessage(error));
+      }
       setSubmitting(false);
     }
   }

@@ -37,6 +37,7 @@ from app.schemas.investigation import (
     InvestigationPage,
     RetryResponse,
 )
+from app.services.billing import check_export_access, check_investigation_quota
 from app.services.pipeline import pipeline
 from app.services.storage import storage_service
 
@@ -108,6 +109,8 @@ async def create_investigation(
     user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ) -> InvestigationCreateResponse:
+    await check_investigation_quota(db, user)
+
     input_text: str | None = None
     input_url: str | None = None
     stored = None
@@ -283,6 +286,7 @@ async def export_investigation(
     db: AsyncSession = Depends(get_db),
 ) -> JSONResponse:
     investigation = await _get_owned(db, investigation_id, user)
+    await check_export_access(db, user)
     payload = {
         "id": str(investigation.id),
         "input_type": investigation.input_type.value,

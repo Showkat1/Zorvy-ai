@@ -15,7 +15,7 @@ Zorvy is **technically credible and commercially unproven**.
 
 | Question an investor asks | Answer today | Verdict |
 |---|---|---|
-| Does the product exist and work? | Yes — FastAPI + Next.js application, 8-stage pipeline, 51 backend tests, CI, Docker | **Strong** |
+| Does the product exist and work? | Yes — FastAPI + Next.js application, 8-stage pipeline, 62 backend tests, CI, Docker | **Strong** |
 | Is the intelligence defensible? | Deterministic, explanation-first engine with an India-first brand registry, no LLM required | **Strong for a seed-stage story** |
 | Can accuracy be verified? | Deterministic benchmark harness and a generated report over 28 labelled cases, 8 of them India-focused | **Started, not sufficient** |
 | Is the IP protected? | Proprietary licence, no copyleft in shipped code, security disclosure policy | **Partial** |
@@ -35,7 +35,9 @@ and clean ownership**. Everything in §6 is founder work, not engineering work.
 | Benchmark harness | `backend/scripts/benchmark.py` | Accuracy, confusion, signal detection and latency are reproducible on any machine |
 | Benchmark report | [`BENCHMARK-REPORT.md`](BENCHMARK-REPORT.md) | The current numbers, the method, and the limits, in one page |
 | Machine-readable results | `docs/zorvy/benchmark-results.json` | Per-case verdicts for a technical reviewer to inspect |
-| Test suite | `backend/tests/` | 51 tests covering auth, isolation, extraction, Indian formats, URL intelligence, risk gating and the evaluation set |
+| Test suite | `backend/tests/` | 62 tests covering auth, isolation, extraction, Indian formats, URL intelligence, risk gating, subscription quotas, webhook lifecycle and the evaluation set |
+| Billing | `backend/app/services/billing.py`, `backend/app/api/billing.py` | Free/Pro/Standard quotas enforced server-side; Razorpay checkout verified by signature, webhooks mirrored idempotently, cancel at period end |
+| Deployment runbook | [`DEPLOYMENT.md`](../DEPLOYMENT.md) | A reproducible Vercel + Railway + Razorpay path with custom-domain and cookie requirements spelled out |
 | CI | `.github/workflows/ci.yml` | Lint, tests, frontend typecheck/build and Docker builds on every push |
 | Proprietary licence | [`LICENSE`](../../LICENSE) | The engine is not forkable; no implied evaluation rights |
 | Licence hygiene | `backend/pyproject.toml` | The AGPL PDF library (PyMuPDF) was replaced with BSD-licensed `pypdf`; shipping runtime dependencies are permissive |
@@ -48,7 +50,7 @@ Reproduce the headline evidence with:
 ```bash
 cd backend
 uv run pytest -q
-uv run ruff check app tests scripts
+uv run ruff check app tests scripts migrations
 uv run python -m scripts.benchmark
 ```
 
@@ -64,13 +66,13 @@ does not exist.
 |---|---|---|---|
 | Problem clarity | 🟢 | Strategy set [`01`](01-MASTER-THESIS.md)–[`07`](07-RISK-REGISTER.md) | — |
 | Product completeness | 🟢 | Working app, 8 persisted stages, audit trail | — |
-| Engineering quality | 🟢 | 51 tests, ruff clean, CI, Docker, typed schemas | Add coverage reporting |
+| Engineering quality | 🟢 | 62 tests, ruff clean, CI, Docker, typed schemas | Add coverage reporting |
 | Technical differentiation | 🟢 | Deterministic explainable engine, claim verification, India-first brand registry | Publish the ruleset versioning approach |
 | Accuracy evidence | 🟡 | 28-case benchmark, 100% level accuracy, 87.9% signal recall, F1 0.718 | External labelled set, inter-annotator agreement, per-category precision/recall on real reports |
 | India-first depth | 🟡 | 57 Indian brands, Indian suffixes, INR/`₹`, `+91` phones, Indian institution extraction, 8 India-focused cases | Indian-language cases (Hindi, Marathi, Tamil, Bengali), larger Indian institution corpus, regional-language registry |
 | Security posture | 🟡 | Rotation, rate limiting, isolation, disclosure policy | VAPT report, dependency scanning, secret scanning, threat model |
 | Legal hygiene | 🟡 | Proprietary licence; shipping runtime dependencies are permissive (AGPL PDF library replaced) | Trademark search/filing, IP assignment, privacy policy, DPA template; drop the AGPL `legacy/streamlit` tree before sharing source |
-| Commercial proof | 🔴 | None | 1–2 paid pilots or signed LOIs |
+| Commercial proof | 🔴 | Subscription billing (Free/Pro/Standard, Razorpay) is implemented and testable, but there are zero paying customers | 1–2 paid pilots or signed LOIs |
 | Distribution | 🔴 | None | Consumer wedge live, first 1,000 checks |
 | Team | ⚪ | Not assessed here | Founder-only narrative |
 | Financial plan | 🟡 | [`05`](05-ECONOMICS-AND-GTM.md) | Bottom-up model reconciled to actual costs |

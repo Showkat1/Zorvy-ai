@@ -19,6 +19,7 @@ from app.schemas.device import (
     DeviceScanListItem,
     DeviceScanPage,
 )
+from app.services.billing import check_device_scan_quota
 from app.services.device_scan import assess_device, device_label
 
 router = APIRouter(prefix="/device", tags=["Device"])
@@ -65,6 +66,7 @@ async def create_device_scan(
     user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ) -> DeviceScanDetail:
+    await check_device_scan_quota(db, user)
     snapshot = payload.snapshot
     assessment = assess_device(snapshot)
     label = (payload.label or "").strip() or device_label(snapshot)

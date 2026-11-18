@@ -15,6 +15,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 
+import { BillingCard } from "@/components/billing/billing-card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -223,6 +224,8 @@ export default function SettingsPage() {
           </CardContent>
         </Card>
       </div>
+
+      <BillingCard />
 
       <Card>
         <CardHeader>

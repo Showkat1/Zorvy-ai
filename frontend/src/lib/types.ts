@@ -407,3 +407,55 @@ export interface DeviceScanPage {
   page_size: number;
   pages: number;
 }
+
+export type PlanId = "free" | "pro" | "standard";
+
+export interface PlanLimits {
+  id: PlanId;
+  name: string;
+  tagline: string;
+  price_inr: number;
+  investigations_per_month: number | null;
+  device_scans_per_month: number | null;
+  exports: boolean;
+  api_access: boolean;
+}
+
+export interface PlansResponse {
+  billing_enabled: boolean;
+  currency: string;
+  plans: PlanLimits[];
+}
+
+export interface BillingUsage {
+  investigations: number;
+  device_scans: number;
+  period_start: string;
+  period_end: string;
+}
+
+export interface SubscriptionState {
+  plan: PlanId;
+  name: string;
+  status: string;
+  current_period_end: string | null;
+  cancel_at_period_end: boolean;
+  billing_enabled: boolean;
+  limits: PlanLimits;
+  usage: BillingUsage;
+}
+
+export interface CheckoutResponse {
+  subscription_id: string;
+  key_id: string;
+  short_url: string | null;
+  name: string;
+  description: string;
+}
+
+export interface PaymentVerification {
+  razorpay_payment_id: string;
+  razorpay_subscription_id: string;
+  razorpay_signature: string;
+}
+

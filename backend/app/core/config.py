@@ -99,6 +99,19 @@ class Settings(BaseSettings):
     log_json: bool = False
     sentry_dsn: str = ""
 
+    # Billing (Razorpay subscriptions). Empty values disable checkout while
+    # leaving the Free plan and the pricing catalogue fully functional.
+    billing_currency: str = "INR"
+    billing_total_count: int = 120
+    free_investigations_per_month: int = 5
+    free_device_scans_per_month: int = 3
+    pro_device_scans_per_month: int = 30
+    razorpay_key_id: str = ""
+    razorpay_key_secret: str = ""
+    razorpay_webhook_secret: str = ""
+    razorpay_plan_pro: str = ""
+    razorpay_plan_standard: str = ""
+
     @field_validator("cors_origins", mode="before")
     @classmethod
     def _split_origins(cls, value: object) -> object:
@@ -152,6 +165,15 @@ class Settings(BaseSettings):
     @property
     def llm_configured(self) -> bool:
         return self.llm_enabled and bool(self.llm_api_key.strip())
+
+    @property
+    def billing_configured(self) -> bool:
+        return bool(
+            self.razorpay_key_id.strip()
+            and self.razorpay_key_secret.strip()
+            and self.razorpay_plan_pro.strip()
+            and self.razorpay_plan_standard.strip()
+        )
 
 
 @lru_cache(maxsize=1)

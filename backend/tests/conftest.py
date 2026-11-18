@@ -23,6 +23,11 @@ os.environ.update(
         "ZORVY_EMBEDDING_PROVIDER": "hash",
         "ZORVY_COOKIE_SECURE": "false",
         "ZORVY_LOG_LEVEL": "WARNING",
+        "ZORVY_RAZORPAY_KEY_ID": "rzp_test_key",
+        "ZORVY_RAZORPAY_KEY_SECRET": "test-key-secret",
+        "ZORVY_RAZORPAY_WEBHOOK_SECRET": "test-webhook-secret",
+        "ZORVY_RAZORPAY_PLAN_PRO": "plan_test_pro",
+        "ZORVY_RAZORPAY_PLAN_STANDARD": "plan_test_standard",
     }
 )
 

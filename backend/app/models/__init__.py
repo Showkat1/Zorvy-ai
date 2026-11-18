@@ -7,6 +7,7 @@ from app.models.investigation import (
     RiskLevel,
 )
 from app.models.knowledge import KnowledgeChunk, KnowledgeDocument
+from app.models.subscription import Plan, Subscription, SubscriptionStatus
 from app.models.user import RefreshToken, User, UserRole
 
 __all__ = [
@@ -17,8 +18,11 @@ __all__ = [
     "InvestigationStatus",
     "KnowledgeChunk",
     "KnowledgeDocument",
+    "Plan",
     "RefreshToken",
     "RiskLevel",
+    "Subscription",
+    "SubscriptionStatus",
     "User",
     "UserRole",
 ]

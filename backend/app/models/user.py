@@ -39,6 +39,12 @@ class User(UUIDMixin, TimestampMixin, Base):
     device_scans: Mapped[list[DeviceScan]] = relationship(  # noqa: F821
         "DeviceScan", back_populates="user", cascade="all, delete-orphan"
     )
+    subscription: Mapped[Subscription | None] = relationship(  # noqa: F821
+        "Subscription",
+        back_populates="user",
+        cascade="all, delete-orphan",
+        uselist=False,
+    )
 
 
 class RefreshToken(UUIDMixin, Base):

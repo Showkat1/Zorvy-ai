@@ -13,7 +13,7 @@ from fastapi.responses import JSONResponse
 from sqlalchemy.exc import IntegrityError
 
 from app import __version__
-from app.api import analytics, auth, device, investigations, knowledge, system
+from app.api import analytics, auth, billing, device, investigations, knowledge, system
 from app.core.config import settings
 from app.core.db import SessionLocal, close_db, init_models
 from app.core.errors import AppError
@@ -165,6 +165,7 @@ app.include_router(system.router)
 app.include_router(auth.router, prefix=settings.api_v1_prefix)
 app.include_router(investigations.router, prefix=settings.api_v1_prefix)
 app.include_router(device.router, prefix=settings.api_v1_prefix)
+app.include_router(billing.router, prefix=settings.api_v1_prefix)
 app.include_router(analytics.router, prefix=settings.api_v1_prefix)
 app.include_router(knowledge.router, prefix=settings.api_v1_prefix)
 app.include_router(system.router, prefix=settings.api_v1_prefix, include_in_schema=False)

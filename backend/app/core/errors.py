@@ -44,3 +44,8 @@ class ForbiddenError(AppError):
 class ValidationError(AppError):
     def __init__(self, message: str, details: Any = None) -> None:
         super().__init__(message, status_code=422, code="validation_error", details=details)
+
+
+class PaymentRequiredError(AppError):
+    def __init__(self, message: str, details: Any = None) -> None:
+        super().__init__(message, status_code=402, code="payment_required", details=details)

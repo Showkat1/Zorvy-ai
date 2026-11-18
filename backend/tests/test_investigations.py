@@ -117,9 +117,9 @@ def test_list_filter_export_retry_delete(client: TestClient, auth: dict[str, str
     assert any(item["id"] == investigation_id for item in listing.json()["items"])
 
     export = client.get(f"/api/v1/investigations/{investigation_id}/export", headers=auth)
-    assert export.status_code == 200
-    assert "attachment" in export.headers["content-disposition"]
-    assert export.json()["report"]["risk"]["level"] == "CRITICAL"
+    # The Free plan cannot export; paid plans are covered in test_billing.py.
+    assert export.status_code == 402
+    assert export.json()["error"]["code"] == "payment_required"
 
     retry = client.post(f"/api/v1/investigations/{investigation_id}/retry", headers=auth)
     assert retry.status_code == 200

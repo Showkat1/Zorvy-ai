@@ -29,6 +29,7 @@ usable for demos, offline testing and evaluation.
 - [Configuration](#configuration)
 - [Investigation pipeline](#investigation-pipeline)
 - [Risk model](#risk-model)
+- [Plans and billing](#plans-and-billing)
 - [API surface](#api-surface)
 - [Testing](#testing)
 - [Investor materials](#investor-materials)
@@ -136,6 +137,7 @@ zorvy-ai/
 │   └── test_cases/          28-case evaluation dataset
 ├── docs/
 │   ├── ARCHITECTURE.md      Deeper design notes
+│   ├── DEPLOYMENT.md        Production runbook: Vercel + Railway + Razorpay
 │   └── zorvy/               Commercialisation strategy: thesis, market, product, roadmap,
 │                            economics, investor readiness and risk register
 ├── legacy/streamlit/        Original Streamlit MVP (preserved)
@@ -235,6 +237,11 @@ All backend settings use the `ZORVY_` prefix and are validated by Pydantic. See
 | `ZORVY_OCR_ENABLED` | `true` | Enables Tesseract OCR for screenshots. |
 | `ZORVY_RATE_LIMIT_ENABLED` | `true` | Per-user/IP sliding-window limits. |
 | `ZORVY_AUTO_CREATE_TABLES` | `true` | Disable in production; use Alembic. |
+| `ZORVY_RAZORPAY_KEY_ID` / `_KEY_SECRET` | empty | Empty disables checkout; Free plan keeps working. |
+| `ZORVY_RAZORPAY_WEBHOOK_SECRET` | empty | Verifies Razorpay webhook signatures. |
+| `ZORVY_RAZORPAY_PLAN_PRO` / `_PLAN_STANDARD` | empty | Provider plan IDs from `scripts/setup_razorpay_plans.py`. |
+| `ZORVY_FREE_INVESTIGATIONS_PER_MONTH` | `5` | Free-plan monthly investigation quota. |
+| `ZORVY_FREE_DEVICE_SCANS_PER_MONTH` | `3` | Free-plan monthly device-scan quota. |
 
 Frontend configuration is a single build-time variable:
 
@@ -289,6 +296,27 @@ test suite.
 
 ---
 
+## Plans and billing
+
+| Plan | Price | Investigations | Device scans | Export | API access |
+| --- | --- | --- | --- | --- | --- |
+| Free | ₹0 | 5 / month | 3 / month | — | — |
+| Pro | ₹499 / month | Unlimited | 30 / month | JSON | — |
+| Standard | ₹1,999 / month | Unlimited | Unlimited | JSON | Yes |
+
+Quotas are enforced server-side: the sixth Free investigation, the fourth Free
+device scan and any Free export return `402 payment_required` with an upgrade
+hint. Paid plans are driven entirely by Razorpay subscription state, so a webhook
+or a verified checkout is the only way to grant entitlement. Free accounts have
+no subscription row.
+
+Billing is optional at runtime. With no Razorpay keys the Free plan, the pricing
+catalogue and the Settings billing card still work; checkout returns
+`billing_not_configured`. See [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) for the
+full Razorpay setup.
+
+---
+
 ## API surface
 
 Base path: `/api/v1` (health and metadata are also exposed at the root).
@@ -320,6 +348,12 @@ Base path: `/api/v1` (health and metadata are also exposed at the root).
 | `POST` | `/knowledge/reindex` | Re-index trusted documents (admin). |
 | `GET` | `/health`, `/health/ready` | Liveness and readiness probes. |
 | `GET` | `/meta` | Pipeline stages, risk bands, engine modes. |
+| `GET` | `/billing/plans` | Public pricing catalogue and whether checkout is configured. |
+| `GET` | `/billing/subscription` | Current plan, renewal date and period usage. |
+| `POST` | `/billing/checkout` | Create a Razorpay subscription for `pro` or `standard`. |
+| `POST` | `/billing/verify` | Verify the checkout signature and activate the plan. |
+| `POST` | `/billing/cancel` | Cancel at period end. |
+| `POST` | `/billing/webhook` | Razorpay webhook (HMAC-verified, not in the OpenAPI schema). |
 
 Errors use a stable envelope:
 
@@ -345,7 +379,8 @@ cd frontend && npm run build
 
 The suite covers authentication and session rotation, investigation lifecycle, evidence
 extraction, URL intelligence, correlation, the risk engine (including independent-evidence
-gating), device-scan scoring and ownership isolation, and the full evaluation dataset.
+gating), device-scan scoring and ownership isolation, subscription quotas and webhook
+lifecycle, and the full evaluation dataset.
 
 Reproduce the accuracy benchmark and refresh the published report:
 
@@ -365,6 +400,7 @@ The commercialisation strategy and the evidence pack live in [`docs/zorvy/`](doc
 | [`BENCHMARK-REPORT.md`](docs/zorvy/BENCHMARK-REPORT.md) | Generated accuracy, confusion, signal and latency results with stated limits |
 | [`benchmark-results.json`](docs/zorvy/benchmark-results.json) | Per-case machine-readable results |
 | [`01`](docs/zorvy/01-MASTER-THESIS.md)–[`07`](docs/zorvy/07-RISK-REGISTER.md) | Thesis, market, product, roadmap, economics, diligence, risk |
+| [`DEPLOYMENT.md`](docs/DEPLOYMENT.md) | Production runbook: Vercel + Railway + Razorpay, domains, verification and rollback |
 
 The benchmark is deterministic and offline: the same commit produces the same verdicts. It is a
 specification-conformance measure over a small labelled suite, not a claim of field accuracy.
@@ -384,6 +420,12 @@ Zorvy is proprietary software. See [`LICENSE`](LICENSE) and [`SECURITY.md`](SECU
 - [ ] Rate limits enabled; consider an edge limiter in front of the API.
 - [ ] Pin `NEXT_PUBLIC_API_URL` at build time and rebuild the web image per environment.
 - [ ] Retention job (`make cleanup`) scheduled to honour `ZORVY_RETENTION_DAYS`.
+- [ ] `app.<domain>` and `api.<domain>` on the same registrable domain so the `SameSite=Lax`
+      refresh cookie is sent (Vercel + Railway custom domains — see
+      [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md)).
+- [ ] `ZORVY_COOKIE_DOMAIN=.example.com`, `ZORVY_COOKIE_SECURE=true`, CORS limited to the web origin.
+- [ ] Razorpay keys, plan IDs and webhook secret set; webhook events configured; a test-mode
+      subscription completes end to end.
 
 ---
 

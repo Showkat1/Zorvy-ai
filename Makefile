@@ -5,7 +5,8 @@
 # ---------------------------------------------------------------------------
 
 .PHONY: help install dev-api dev-web test lint format typecheck build \
-        up down logs ps migrate revision seed cleanup reset benchmark
+        up down logs ps migrate revision seed cleanup reset benchmark \
+        razorpay-plans
 
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | \
@@ -28,11 +29,11 @@ benchmark: ## Run the deterministic accuracy benchmark and refresh the report
 	cd backend && uv run python -m scripts.benchmark --markdown ../docs/zorvy/BENCHMARK-REPORT.md
 
 lint: ## Lint backend and frontend
-	cd backend && uv run ruff check app tests scripts
+	cd backend && uv run ruff check app tests scripts migrations
 	cd frontend && npx eslint .
 
 format: ## Auto-fix backend lint issues
-	cd backend && uv run ruff check app tests scripts --fix
+	cd backend && uv run ruff check app tests scripts migrations --fix
 
 typecheck: ## Type-check the frontend
 	cd frontend && npx tsc --noEmit
@@ -63,6 +64,9 @@ seed: ## Seed the demo user, knowledge base and sample investigations
 
 cleanup: ## Delete investigations older than the retention window
 	cd backend && uv run python -m scripts.cleanup
+
+razorpay-plans: ## Create Razorpay plans and print their IDs (needs test/live keys)
+	cd backend && uv run python scripts/setup_razorpay_plans.py
 
 reset: ## Remove the stack and its volumes (destructive)
 	docker compose down -v

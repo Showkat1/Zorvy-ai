@@ -233,3 +233,22 @@ def test_device_scan_rejects_invalid_snapshot(client: TestClient, auth: dict[str
         headers=auth,
     )
     assert too_many_addresses.status_code == 422
+
+
+def test_free_plan_device_scans_are_capped(
+    client: TestClient, auth: dict[str, str]
+) -> None:
+    for _ in range(3):
+        _create(client, auth)
+
+    blocked = client.post(
+        "/api/v1/device/scans",
+        json={"snapshot": make_snapshot()},
+        headers=auth,
+    )
+    assert blocked.status_code == 402
+    error = blocked.json()["error"]
+    assert error["code"] == "payment_required"
+    assert error["details"]["limit"] == 3
+    assert error["details"]["used"] == 3
+
