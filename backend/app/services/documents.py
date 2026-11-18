@@ -1,19 +1,17 @@
 from __future__ import annotations
 
 import asyncio
+import io
 
 from app.core.errors import AppError
 
 
 def _extract_pdf(data: bytes) -> str:
-    import pymupdf
+    from pypdf import PdfReader
 
-    document = pymupdf.open(stream=data, filetype="pdf")
-    try:
-        pages = [page.get_text("text") for page in document]
-        return "\n\n".join(pages).strip()
-    finally:
-        document.close()
+    reader = PdfReader(io.BytesIO(data))
+    pages = [page.extract_text() or "" for page in reader.pages]
+    return "\n\n".join(pages).strip()
 
 
 def _extract_txt(data: bytes) -> str:
