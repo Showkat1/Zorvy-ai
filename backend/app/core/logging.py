@@ -38,5 +38,5 @@ def configure_logging() -> None:
     )
 
 
-def get_logger(name: str = "trustscan") -> structlog.stdlib.BoundLogger:
+def get_logger(name: str = "zorvy") -> structlog.stdlib.BoundLogger:
     return structlog.get_logger(name)

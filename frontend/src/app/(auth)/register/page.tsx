@@ -163,7 +163,7 @@ export default function RegisterPage() {
       </form>
 
       <p className="mt-5 text-[11px] leading-relaxed text-faint">
-        By creating an account you agree that TrustScan provides evidence-based risk
+        By creating an account you agree that Zorvy provides evidence-based risk
         intelligence, not legal or financial advice.
       </p>
 

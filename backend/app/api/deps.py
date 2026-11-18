@@ -13,7 +13,7 @@ from app.core.security import TokenError, decode_access_token
 from app.models.audit import AuditEvent
 from app.models.user import User, UserRole
 
-bearer_scheme = HTTPBearer(auto_error=False, description="TrustScan access token")
+bearer_scheme = HTTPBearer(auto_error=False, description="Zorvy access token")
 
 
 def client_ip(request: Request) -> str | None:

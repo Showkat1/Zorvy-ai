@@ -1,6 +1,6 @@
-# TrustScan AI — Master Transformation Strategy
+# Zorvy — Master Transformation Strategy
 
-**Status:** Draft v1.0 · 05 Nov 2026
+**Status:** Draft v1.1 · 18 Nov 2026
 **Scope:** Commercialisation of the working application into an institutional fraud-intelligence platform
 **Beachhead:** India · **Revenue motion:** institutional API + consumer wedge
 **Endgame:** acquisition-ready in 18–24 months
@@ -12,11 +12,28 @@
 India runs the highest-volume real-time payment rails in the world on top of a population that
 receives more fraud attempts than any support organisation can answer. Banks are liable,
 regulated and audited, but their fraud teams still triage customer-reported screenshots by
-hand. TrustScan already does the hard part — it turns an unstructured artifact (message, URL,
+hand. Zorvy already does the hard part — it turns an unstructured artifact (message, URL,
 screenshot, document) into an evidence-grounded, explainable verdict with an audit trail. The
 transformation is not a rebuild; it is **productising an engine we already own for the buyers
 who are legally obliged to care**, with a free consumer checker as the wedge that earns
 distribution and the corpus that no vendor can buy.
+
+---
+
+## Brand and geography
+
+**Zorvy** is a coined, language-neutral name. It was chosen so the product reads as an Indian
+company rather than a local-only tool, and as an international product rather than a foreign one
+in the markets that follow. It replaces the working name used during development.
+
+The operating order is fixed:
+
+1. **India first** — Indian institutions, payment rails, languages and domain suffixes.
+2. **Adjacent markets** — Pakistan and the Gulf, where the same evidence model applies.
+3. **Global** — the registry already carries global brands, but global claims wait for local data.
+
+Being India-first is a sequencing decision, not a market-size limit. Every data model, brand
+record and evaluation case is built to travel.
 
 ---
 

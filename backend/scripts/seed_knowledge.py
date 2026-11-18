@@ -15,7 +15,7 @@ async def main(force: bool) -> None:
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Index the TrustScan knowledge base")
+    parser = argparse.ArgumentParser(description="Index the Zorvy knowledge base")
     parser.add_argument("--force", action="store_true", help="Re-embed unchanged documents")
     args = parser.parse_args()
     asyncio.run(main(args.force))

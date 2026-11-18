@@ -42,6 +42,8 @@ class EvidenceExtractor:
         r"(?:\+92[\s-]?\d{3}[\s-]?\d{7}"
         r"|03\d{2}[\s-]?\d{7}"
         r"|0092[\s-]?\d{3}[\s-]?\d{7}"
+        r"|\+91[\s-]?\d{5}[\s-]?\d{5}"
+        r"|(?<!\d)[6-9]\d{9}(?!\d)"
         r"|\+\d{1,3}[\s.-]?\(?\d{2,4}\)?[\s.-]?\d{3,4}[\s.-]?\d{3,4})"
         r"(?!\d)",
         re.IGNORECASE,
@@ -63,7 +65,8 @@ class EvidenceExtractor:
     MONEY_PATTERN = re.compile(
         r"\b(?:PKR|Rs\.?|Rupees?|USD|US\$|AED|SAR|GBP|EUR|INR)\s*[\d,]+(?:\.\d+)?"
         r"|\b[\d,]+(?:\.\d+)?\s*(?:PKR|Rs\.?|Rupees?|USD|AED|SAR|GBP|EUR|INR)\b"
-        r"|\$\s?[\d,]+(?:\.\d+)?",
+        r"|\$\s?[\d,]+(?:\.\d+)?"
+        r"|\u20b9\s?[\d,]+(?:\.\d+)?",
         re.IGNORECASE,
     )
 
@@ -72,6 +75,15 @@ class EvidenceExtractor:
     # ---------------------------------------------------------
 
     ORGANIZATION_PATTERNS = [
+        r"\b(?:Reserve Bank of India|RBI)\b",
+        r"\b(?:Securities and Exchange Board of India|SEBI)\b",
+        r"\b(?:UIDAI|Aadhaar)\b",
+        r"\b(?:Income Tax Department|Income Tax)\b",
+        r"\b(?:Employees' Provident Fund Organisation|EPFO)\b",
+        r"\b(?:Goods and Services Tax|GST)\b",
+        r"\b(?:IRDAI|NPCI|IRCTC)\b",
+        r"\b(?:State Bank of India|SBI|HDFC Bank|ICICI Bank|Axis Bank|Kotak|Punjab National Bank|PNB)\b",
+        r"\b(?:Paytm|PhonePe|Google Pay|GPay|BHIM|UPI)\b",
         r"\b(?:State Bank of Pakistan|SBP)\b",
         r"\b(?:Federal Board of Revenue|FBR)\b",
         r"\b(?:NADRA)\b",
@@ -113,6 +125,9 @@ class EvidenceExtractor:
         r"\busername\b",
         r"\blogin details?\b",
         r"\baccount details?\b",
+        r"\bbank details?\b",
+        r"\baadhaar(?: number)?\b",
+        r"\bcvv\b",
         r"\bcard details?\b",
         r"\bcredit card\b",
         r"\bdebit card\b",
@@ -133,13 +148,18 @@ class EvidenceExtractor:
     # ---------------------------------------------------------
 
     FINANCIAL_REQUEST_PATTERNS = [
-        r"\bsend\s+(?:pkr|rs\.?|rupees?)\s*[\d,]+",
-        r"\bpay\s+(?:pkr|rs\.?|rupees?)\s*[\d,]+",
-        r"\binvest\s+(?:pkr|rs\.?|rupees?)\s*[\d,]+",
-        r"\btransfer\s+(?:pkr|rs\.?|rupees?)\s*[\d,]+",
-        r"\bdeposit\s+(?:pkr|rs\.?|rupees?)\s*[\d,]+",
+        r"\bsend\s+(?:pkr|inr|rs\.?|rupees?)\s*[\d,]+",
+        r"\bpay\s+(?:pkr|inr|rs\.?|rupees?)\s*[\d,]+",
+        r"\binvest\s+(?:pkr|inr|rs\.?|rupees?)\s*[\d,]+",
+        r"\btransfer\s+(?:pkr|inr|rs\.?|rupees?)\s*[\d,]+",
+        r"\bdeposit\s+(?:pkr|inr|rs\.?|rupees?)\s*[\d,]+",
 
-        r"\b(?:pkr|rs\.?|rupees?)\s*[\d,]+\s+"
+        r"\b(?:pkr|inr|rs\.?|rupees?)\s*[\d,]+\s+"
+        r"(?:registration|processing|verification|security|tax)\s+"
+        r"(?:fee|fees|charges?|payment)",
+
+        r"\b(?:send|pay|invest|transfer|deposit)\s+\u20b9\s*[\d,]+",
+        r"\u20b9\s*[\d,]+\s+"
         r"(?:registration|processing|verification|security|tax)\s+"
         r"(?:fee|fees|charges?|payment)",
 
@@ -227,10 +247,8 @@ class EvidenceExtractor:
         r"\bhiring\b",
         r"\brecruitment\b",
         r"\bvacancy\b",
-        r"\bwork\s+from\s+home\b",
+        r"\bwork[\s-]+from[\s-]+home\b",
         r"\bremote\s+job\b",
-        r"\bregistration\s+fee\b",
-        r"\bprocessing\s+fee\b",
         r"\bjob\s+offer\b",
     ]
 
@@ -607,6 +625,22 @@ class EvidenceExtractor:
             if payment_detected:
                 break
 
+        # A UPI collect request is a payment authorisation in disguise:
+        # the victim is told they are receiving money, but entering the
+        # PIN approves a debit. Treat it as a payment request when the
+        # same message also asks for a credential.
+        upi_collect_request = (
+            "upi" in lower_text
+            and any(
+                term in lower_text
+                for term in ("collect request", "payment request")
+            )
+            and credential_detected
+        )
+
+        if upi_collect_request:
+            payment_detected = True
+
         if payment_detected:
             requests.append("Payment / money transfer")
             risk_indicators.append("advance_payment")
@@ -818,6 +852,15 @@ class EvidenceExtractor:
             "state bank",
             "sbp",
             "government of pakistan",
+            "government of india",
+            "uidai",
+            "aadhaar",
+            "rbi",
+            "sebi",
+            "irdai",
+            "income tax",
+            "epfo",
+            "npci",
         ]
 
         government_detected = any(

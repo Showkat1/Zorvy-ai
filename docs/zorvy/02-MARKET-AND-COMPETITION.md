@@ -98,7 +98,7 @@ tuned for Indian scam patterns, at a price a payment aggregator can sign.**
 ## 5. Positioning
 
 > **For Indian regulated entities that must answer every fraud complaint with evidence,
-> TrustScan is the adjudication API that turns any reported message, link, screenshot or
+> Zorvy is the adjudication API that turns any reported message, link, screenshot or
 > document into a deterministic, explainable verdict — because the answer has to survive a
 > customer dispute, an audit and an RBI inspection, not just a demo.**
 

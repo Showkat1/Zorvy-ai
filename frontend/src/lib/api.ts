@@ -4,7 +4,7 @@ const API_URL = (
   process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000"
 ).replace(/\/+$/, "");
 
-const TOKEN_KEY = "trustscan.access_token";
+const TOKEN_KEY = "zorvy.access_token";
 
 export class ApiError extends Error {
   status: number;
@@ -81,7 +81,7 @@ function parseError(status: number, body: unknown): ApiError {
     return new ApiError("Too many requests. Please slow down.", 429, "rate_limited");
   }
   if (status >= 500) {
-    return new ApiError("TrustScan hit an unexpected error. Please try again.", status, "server_error");
+    return new ApiError("Zorvy hit an unexpected error. Please try again.", status, "server_error");
   }
   return new ApiError("The request could not be completed.", status, "request_failed");
 }
@@ -130,7 +130,7 @@ export async function refreshSession(): Promise<string | null> {
   };
 
   refreshInFlight = (
-    locks?.request ? locks.request("trustscan.refresh", run) : run()
+    locks?.request ? locks.request("zorvy.refresh", run) : run()
   ).finally(() => {
     refreshInFlight = null;
   }) as Promise<string | null>;
@@ -175,7 +175,7 @@ export async function apiRequest<T>(path: string, options: RequestOptions = {}):
   } catch (error) {
     if (error instanceof DOMException && error.name === "AbortError") throw error;
     throw new ApiError(
-      "Cannot reach the TrustScan API. Check that the backend is running.",
+      "Cannot reach the Zorvy API. Check that the backend is running.",
       0,
       "network_error",
     );

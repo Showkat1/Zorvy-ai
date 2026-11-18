@@ -1,6 +1,6 @@
-# TrustScan API
+# Zorvy API
 
-FastAPI service for the TrustScan AI digital-trust investigation platform.
+FastAPI service for the Zorvy digital-trust investigation platform.
 
 ## Run locally
 

@@ -1,11 +1,17 @@
-# TrustScan AI
+# Zorvy
 
 **Verify before you trust.**
 
-TrustScan AI is an evidence-grounded fraud and digital-trust investigation platform. It takes a
+Zorvy is an evidence-grounded fraud and digital-trust investigation platform. It takes a
 suspicious message, URL, screenshot or document, extracts observable evidence, retrieves trusted
 guidance, correlates independent signals, and produces an explainable risk verdict with concrete
 next steps.
+
+It is built **India-first**: Indian banks, payment apps, UPI infrastructure, telecoms, commerce
+and government portals lead the brand registry, Indian domain suffixes resolve correctly, and
+INR is a first-class amount. The same engine and registry extend internationally — Pakistan,
+the Gulf and global brands follow in the same ordered model — so India is the beachhead, not the
+ceiling.
 
 It runs fully **without an LLM API key**: a deterministic analysis engine keeps every feature
 usable for demos, offline testing and evaluation.
@@ -107,7 +113,7 @@ presented as proof of safety.
 ## Repository layout
 
 ```text
-trustscan-ai/
+zorvy-ai/
 ├── backend/                 FastAPI service
 │   ├── app/
 │   │   ├── api/             auth, investigations, device, analytics, knowledge, system
@@ -127,10 +133,10 @@ trustscan-ai/
 │   └── Dockerfile
 ├── data/
 │   ├── knowledge_base/      Trusted cybersecurity guidance (RAG corpus)
-│   └── test_cases/          20-case evaluation dataset
+│   └── test_cases/          28-case evaluation dataset
 ├── docs/
 │   ├── ARCHITECTURE.md      Deeper design notes
-│   └── trustscan/           Commercialisation strategy: thesis, market, product, roadmap,
+│   └── zorvy/               Commercialisation strategy: thesis, market, product, roadmap,
 │                            economics, investor readiness and risk register
 ├── legacy/streamlit/        Original Streamlit MVP (preserved)
 ├── docker-compose.yml
@@ -165,13 +171,13 @@ traffic. Create an account at `/register`, or seed a demo workspace:
 
 ```bash
 docker compose exec api python -m scripts.seed_demo
-# demo@trustscan.ai / TrustScanDemo123
+# demo@zorvy.ai / ZorvyDemo123
 ```
 
 Stop with `docker compose down` (add `-v` to delete the database and uploads).
 
-> The bundled Compose file defaults to `TRUSTSCAN_ENVIRONMENT=development` so refresh cookies work
-> over plain HTTP on localhost. For a real deployment set `TRUSTSCAN_ENVIRONMENT=production` and
+> The bundled Compose file defaults to `ZORVY_ENVIRONMENT=development` so refresh cookies work
+> over plain HTTP on localhost. For a real deployment set `ZORVY_ENVIRONMENT=production` and
 > terminate TLS in front of the stack; cookies become `Secure` automatically.
 
 ---
@@ -183,8 +189,8 @@ Requirements: Python 3.12+ (3.14 recommended), [uv](https://docs.astral.sh/uv/),
 ```bash
 # 1. Environment
 cp .env.example .env
-# Point TRUSTSCAN_DATABASE_URL at PostgreSQL, or use SQLite for a quick run:
-#   TRUSTSCAN_DATABASE_URL=sqlite+aiosqlite:///./trustscan.db
+# Point ZORVY_DATABASE_URL at PostgreSQL, or use SQLite for a quick run:
+#   ZORVY_DATABASE_URL=sqlite+aiosqlite:///./zorvy.db
 
 # 2. Backend
 cd backend
@@ -209,21 +215,26 @@ Useful `make` targets: `install`, `dev-api`, `dev-web`, `test`, `lint`, `typeche
 
 ## Configuration
 
-All backend settings use the `TRUSTSCAN_` prefix and are validated by Pydantic. See
+> **Upgrading from the pre-rebrand name:** configuration now uses the `ZORVY_` prefix, and the
+> Compose project, database and refresh cookie are named `zorvy`. Rename `TRUSTSCAN_*` keys in
+> an existing `.env` to `ZORVY_*`, and run `docker compose down -v` once so volumes are recreated
+> under the new project name. Existing sessions are invalidated by the cookie rename.
+
+All backend settings use the `ZORVY_` prefix and are validated by Pydantic. See
 [`.env.example`](.env.example) for the full annotated list. The settings that matter most:
 
 | Variable | Default | Purpose |
 | --- | --- | --- |
-| `TRUSTSCAN_ENVIRONMENT` | `development` | `development` / `test` / `production`; production enforces secure cookies and no debug. |
-| `TRUSTSCAN_SECRET_KEY` | random per process | JWT signing key — **must** be stable and secret in production. |
-| `TRUSTSCAN_DATABASE_URL` | PostgreSQL URL | `postgresql+asyncpg://…` or `sqlite+aiosqlite:///…`. |
-| `TRUSTSCAN_CORS_ORIGINS` | localhost:3000 | Comma-separated allowed origins. |
-| `TRUSTSCAN_LLM_API_KEY` | empty | Empty ⇒ deterministic fallback engine. |
-| `TRUSTSCAN_EMBEDDING_PROVIDER` | `hash` | `openai`, `sentence-transformers` or `hash`. |
-| `TRUSTSCAN_PIPELINE_MODE` | `background` | `inline` runs the pipeline inside the request (tests/demos). |
-| `TRUSTSCAN_OCR_ENABLED` | `true` | Enables Tesseract OCR for screenshots. |
-| `TRUSTSCAN_RATE_LIMIT_ENABLED` | `true` | Per-user/IP sliding-window limits. |
-| `TRUSTSCAN_AUTO_CREATE_TABLES` | `true` | Disable in production; use Alembic. |
+| `ZORVY_ENVIRONMENT` | `development` | `development` / `test` / `production`; production enforces secure cookies and no debug. |
+| `ZORVY_SECRET_KEY` | random per process | JWT signing key — **must** be stable and secret in production. |
+| `ZORVY_DATABASE_URL` | PostgreSQL URL | `postgresql+asyncpg://…` or `sqlite+aiosqlite:///…`. |
+| `ZORVY_CORS_ORIGINS` | localhost:3000 | Comma-separated allowed origins. |
+| `ZORVY_LLM_API_KEY` | empty | Empty ⇒ deterministic fallback engine. |
+| `ZORVY_EMBEDDING_PROVIDER` | `hash` | `openai`, `sentence-transformers` or `hash`. |
+| `ZORVY_PIPELINE_MODE` | `background` | `inline` runs the pipeline inside the request (tests/demos). |
+| `ZORVY_OCR_ENABLED` | `true` | Enables Tesseract OCR for screenshots. |
+| `ZORVY_RATE_LIMIT_ENABLED` | `true` | Per-user/IP sliding-window limits. |
+| `ZORVY_AUTO_CREATE_TABLES` | `true` | Disable in production; use Alembic. |
 
 Frontend configuration is a single build-time variable:
 
@@ -273,7 +284,7 @@ Design rules:
   contradicted claim, or credential theft combined with a suspicious URL).
 - The explanation names the signals that produced the score.
 
-The bundled 20-case evaluation dataset lives in `data/test_cases/` and is exercised by the backend
+The bundled 28-case evaluation dataset lives in `data/test_cases/` and is exercised by the backend
 test suite.
 
 ---
@@ -346,46 +357,51 @@ make benchmark
 
 ## Investor materials
 
-The commercialisation strategy and the evidence pack live in [`docs/trustscan/`](docs/trustscan/):
+The commercialisation strategy and the evidence pack live in [`docs/zorvy/`](docs/zorvy/):
 
 | Document | Use |
 | --- | --- |
-| [`08-SEED-READINESS.md`](docs/trustscan/08-SEED-READINESS.md) | Start here for a seed conversation: what is verifiable, what is missing, demo script, claims to avoid |
-| [`BENCHMARK-REPORT.md`](docs/trustscan/BENCHMARK-REPORT.md) | Generated accuracy, confusion, signal and latency results with stated limits |
-| [`benchmark-results.json`](docs/trustscan/benchmark-results.json) | Per-case machine-readable results |
-| [`01`](docs/trustscan/01-MASTER-THESIS.md)–[`07`](docs/trustscan/07-RISK-REGISTER.md) | Thesis, market, product, roadmap, economics, diligence, risk |
+| [`08-SEED-READINESS.md`](docs/zorvy/08-SEED-READINESS.md) | Start here for a seed conversation: what is verifiable, what is missing, demo script, claims to avoid |
+| [`BENCHMARK-REPORT.md`](docs/zorvy/BENCHMARK-REPORT.md) | Generated accuracy, confusion, signal and latency results with stated limits |
+| [`benchmark-results.json`](docs/zorvy/benchmark-results.json) | Per-case machine-readable results |
+| [`01`](docs/zorvy/01-MASTER-THESIS.md)–[`07`](docs/zorvy/07-RISK-REGISTER.md) | Thesis, market, product, roadmap, economics, diligence, risk |
 
 The benchmark is deterministic and offline: the same commit produces the same verdicts. It is a
 specification-conformance measure over a small labelled suite, not a claim of field accuracy.
 
-TrustScan is proprietary software. See [`LICENSE`](LICENSE) and [`SECURITY.md`](SECURITY.md).
+Zorvy is proprietary software. See [`LICENSE`](LICENSE) and [`SECURITY.md`](SECURITY.md).
 
 ---
 
 ## Production checklist
 
-- [ ] `TRUSTSCAN_ENVIRONMENT=production` and a strong, stable `TRUSTSCAN_SECRET_KEY`.
-- [ ] `TRUSTSCAN_COOKIE_SECURE=true` (automatic in production) with TLS terminated in front.
-- [ ] `TRUSTSCAN_DEBUG=false`, `TRUSTSCAN_AUTO_CREATE_TABLES=false`, migrations applied by CI/CD.
-- [ ] `TRUSTSCAN_CORS_ORIGINS` restricted to the real web origin.
+- [ ] `ZORVY_ENVIRONMENT=production` and a strong, stable `ZORVY_SECRET_KEY`.
+- [ ] `ZORVY_COOKIE_SECURE=true` (automatic in production) with TLS terminated in front.
+- [ ] `ZORVY_DEBUG=false`, `ZORVY_AUTO_CREATE_TABLES=false`, migrations applied by CI/CD.
+- [ ] `ZORVY_CORS_ORIGINS` restricted to the real web origin.
 - [ ] PostgreSQL backups for the `postgres-data` volume; object storage for uploads if scaling out.
-- [ ] `TRUSTSCAN_LOG_JSON=true` and log shipping; optionally `TRUSTSCAN_SENTRY_DSN`.
+- [ ] `ZORVY_LOG_JSON=true` and log shipping; optionally `ZORVY_SENTRY_DSN`.
 - [ ] Rate limits enabled; consider an edge limiter in front of the API.
 - [ ] Pin `NEXT_PUBLIC_API_URL` at build time and rebuild the web image per environment.
-- [ ] Retention job (`make cleanup`) scheduled to honour `TRUSTSCAN_RETENTION_DAYS`.
+- [ ] Retention job (`make cleanup`) scheduled to honour `ZORVY_RETENTION_DAYS`.
 
 ---
 
 ## Legacy Streamlit MVP
 
 The original single-process Streamlit prototype is preserved unchanged under
-[`legacy/streamlit/`](legacy/streamlit/) for reference and comparison. It is not part of the
-supported deployment; use the FastAPI + Next.js stack above.
+[`legacy/streamlit/`](legacy/streamlit/) for reference and comparison. It retains its original
+TrustScan naming because it is a historical artifact, not part of the supported deployment; use
+the FastAPI + Next.js stack above.
+
+[`legacy/archive/`](legacy/archive/) holds the pre-rebrand hackathon PDFs under their original
+Trustiva AI titles. They are kept for provenance only and are not current product material; the
+`docs/` tree is the Zorvy-branded, investor-facing set.
 
 ---
 
 ## Disclaimer
 
-TrustScan AI provides evidence-based risk intelligence. A high score means a communication warrants
+Zorvy provides evidence-based risk intelligence. A high score means a communication warrants
 verification and caution — it is **not** proof that a person, organization, phone number or URL is
 fraudulent, and it is not legal or financial advice.

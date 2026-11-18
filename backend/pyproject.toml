@@ -3,13 +3,13 @@ requires = ["hatchling>=1.27"]
 build-backend = "hatchling.build"
 
 [project]
-name = "trustscan-api"
+name = "zorvy-api"
 version = "2.0.0"
-description = "TrustScan AI — evidence-grounded fraud investigation API"
+description = "Zorvy — evidence-grounded fraud investigation API"
 readme = "README.md"
 requires-python = ">=3.12"
 license = { text = "Proprietary" }
-authors = [{ name = "TrustScan AI" }]
+authors = [{ name = "Zorvy" }]
 
 dependencies = [
     "fastapi>=0.162,<1.0",

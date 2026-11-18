@@ -44,9 +44,9 @@ def _build_pdf(text: str) -> bytes:
 async def test_pdf_documents_are_extracted() -> None:
     text = await document_service.extract_text(
         "sample.pdf",
-        _build_pdf("TrustScan PDF extraction works"),
+        _build_pdf("Zorvy PDF extraction works"),
     )
-    assert "TrustScan PDF extraction works" in text
+    assert "Zorvy PDF extraction works" in text
 
 
 async def test_malformed_pdf_is_rejected() -> None:

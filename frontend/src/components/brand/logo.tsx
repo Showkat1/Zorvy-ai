@@ -27,7 +27,7 @@ export function Logo({
       </span>
       {showWordmark ? (
         <span className={cn("font-semibold tracking-tight text-foreground", word)}>
-          TrustScan<span className="text-teal-300"> AI</span>
+          Zor<span className="text-teal-300">vy</span>
         </span>
       ) : null}
     </span>

@@ -8,7 +8,7 @@ from app.services.evidence_extractor import EvidenceExtractor
 from app.services.risk_engine import assess_risk
 from app.services.url_intelligence import URLIntelligence
 
-CASES = Path(__file__).resolve().parents[2] / "data" / "test_cases" / "trustscan_test_cases.json"
+CASES = Path(__file__).resolve().parents[2] / "data" / "test_cases" / "zorvy_test_cases.json"
 
 
 def _pipeline(case: dict) -> tuple[dict, list[dict], list[str]]:

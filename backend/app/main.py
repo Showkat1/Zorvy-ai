@@ -37,7 +37,7 @@ async def lifespan(_: FastAPI) -> AsyncIterator[None]:
             logger.warning("knowledge_seed_failed", error=str(exc))
 
     logger.info(
-        "trustscan_started",
+        "zorvy_started",
         environment=settings.environment,
         version=__version__,
         llm="generative" if settings.llm_configured else "deterministic",
@@ -48,9 +48,9 @@ async def lifespan(_: FastAPI) -> AsyncIterator[None]:
 
 
 app = FastAPI(
-    title="TrustScan AI API",
+    title="Zorvy API",
     description=(
-        "Evidence-grounded fraud investigation API. TrustScan correlates extracted evidence, "
+        "Evidence-grounded fraud investigation API. Zorvy correlates extracted evidence, "
         "URL intelligence, trusted-source retrieval and an explainable risk engine."
     ),
     version=__version__,

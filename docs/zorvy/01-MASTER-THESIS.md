@@ -2,7 +2,7 @@
 
 ## 1. The shift
 
-TrustScan is currently a working investigation product: a user submits a suspicious message,
+Zorvy is currently a working investigation product: a user submits a suspicious message,
 link, screenshot or document and receives an evidence-grounded verdict with a risk score, a
 correlation narrative and a ranked action plan. It runs without an LLM key, persists every
 stage, and audits every action.
@@ -73,7 +73,7 @@ copy a screen in a week; copying the auditability contract means rebuilding thei
                                     │ volume, reports, patterns
                                     ▼
    ┌────────────────────────────────────────────────────────────┐
-   │  TrustScan adjudication engine (already built)             │
+   │  Zorvy adjudication engine (already built)                 │
    │  evidence → correlation → deterministic score → guidance   │
    └──────────────┬──────────────────────────┬──────────────────┘
                   │                          │

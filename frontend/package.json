@@ -1,8 +1,8 @@
 {
-  "name": "trustscan-web",
+  "name": "zorvy-web",
   "version": "2.0.0",
   "private": true,
-  "description": "TrustScan AI — evidence-grounded fraud and digital-trust investigation platform",
+  "description": "Zorvy — evidence-grounded fraud and digital-trust investigation platform",
   "scripts": {
     "dev": "next dev --port 3000",
     "build": "next build",

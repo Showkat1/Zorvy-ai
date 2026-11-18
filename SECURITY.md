@@ -1,6 +1,6 @@
 # Security Policy
 
-TrustScan analyses hostile content: phishing messages, impersonation links and
+Zorvy analyses hostile content: phishing messages, impersonation links and
 fraudulent documents. We treat reports about the product itself with the same
 seriousness as reports about the content it analyses.
 

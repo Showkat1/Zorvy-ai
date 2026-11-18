@@ -296,14 +296,14 @@ async def export_investigation(
         "threat_category": investigation.threat_category,
         "report": investigation.result,
         "disclaimer": (
-            "TrustScan provides evidence-based risk intelligence. This report is not proof "
+            "Zorvy provides evidence-based risk intelligence. This report is not proof "
             "that a person, organization, phone number, URL or account is fraudulent."
         ),
     }
     return JSONResponse(
         content=payload,
         headers={
-            "Content-Disposition": f'attachment; filename="trustscan-{investigation.id}.json"'
+            "Content-Disposition": f'attachment; filename="zorvy-{investigation.id}.json"'
         },
     )
 

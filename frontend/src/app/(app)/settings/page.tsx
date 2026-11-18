@@ -258,7 +258,7 @@ export default function SettingsPage() {
         <CardContent className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <p className="max-w-xl text-xs leading-relaxed text-muted">
             Revoke every refresh token associated with your account. Any other device signed in
-            to TrustScan will need to authenticate again.
+            to Zorvy will need to authenticate again.
           </p>
           <Button
             variant="secondary"
@@ -323,7 +323,7 @@ export default function SettingsPage() {
 
       <p className="flex items-center justify-center gap-1.5 pb-4 text-[11px] text-faint">
         <CheckCircle2 className="size-3.5 text-teal-400/70" />
-        TrustScan AI · evidence-grounded risk intelligence
+        Zorvy · evidence-grounded risk intelligence
       </p>
     </div>
   );

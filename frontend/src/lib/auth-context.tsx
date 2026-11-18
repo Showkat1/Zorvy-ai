@@ -33,7 +33,7 @@ const AuthContext = createContext<AuthContextValue | null>(null);
 
 // Non-sensitive flag: the refresh cookie is httpOnly, so this marker lets the
 // app skip a guaranteed-401 refresh call for visitors who never signed in.
-const SESSION_MARKER = "trustscan.has_session";
+const SESSION_MARKER = "zorvy.has_session";
 
 function readSessionMarker(): boolean {
   if (typeof window === "undefined") return false;

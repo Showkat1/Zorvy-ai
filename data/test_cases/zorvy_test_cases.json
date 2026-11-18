@@ -212,5 +212,94 @@
     "expected_risk": "LOW",
     "message": "For your security, never share your password, PIN or OTP with anyone. Our bank will never ask customers to provide these credentials by phone or message.",
     "expected_signals": []
+  },
+  {
+    "id": "IN01",
+    "name": "HDFC KYC Phishing",
+    "category": "phishing",
+    "expected_risk": "CRITICAL",
+    "message": "Your HDFC Bank account will be blocked today. Complete KYC at https://hdfcbank-kyc-verify.top/ and send your OTP to +91 98765 43210. Pay ₹499 verification fee immediately.",
+    "expected_signals": [
+      "credential_request",
+      "advance_payment",
+      "artificial_urgency",
+      "suspicious_url",
+      "impersonation"
+    ]
+  },
+  {
+    "id": "IN02",
+    "name": "SBI Fake Login",
+    "category": "phishing",
+    "expected_risk": "HIGH",
+    "message": "SBI: Your account is suspended. Verify at https://secure-onlinesbi.sbi.co.in/login and enter your password and OTP within 10 minutes.",
+    "expected_signals": [
+      "credential_request",
+      "artificial_urgency",
+      "suspicious_url"
+    ]
+  },
+  {
+    "id": "IN03",
+    "name": "PhonePe Cashback Scam",
+    "category": "prize_scam",
+    "expected_risk": "HIGH",
+    "message": "Congratulations! You won ₹25,000 PhonePe cashback. Pay ₹199 processing fee to claim: https://phonepe-reward.top/claim",
+    "expected_signals": [
+      "advance_payment",
+      "prize_scam",
+      "suspicious_url"
+    ]
+  },
+  {
+    "id": "IN04",
+    "name": "UPI Collect Request Scam",
+    "category": "social_engineering",
+    "expected_risk": "HIGH",
+    "message": "Accept the UPI collect request from 9876543210 to receive ₹15,000. Enter your UPI PIN to confirm.",
+    "expected_signals": [
+      "credential_request",
+      "advance_payment"
+    ]
+  },
+  {
+    "id": "IN05",
+    "name": "Fake IRCTC Refund",
+    "category": "phishing",
+    "expected_risk": "CRITICAL",
+    "message": "IRCTC refund pending ₹1,250. Update your bank details at https://irctc-refund.top/verify to receive the refund.",
+    "expected_signals": [
+      "credential_request",
+      "suspicious_url",
+      "impersonation"
+    ]
+  },
+  {
+    "id": "IN06",
+    "name": "Fake UIDAI Suspension",
+    "category": "government_impersonation",
+    "expected_risk": "HIGH",
+    "message": "UIDAI: Your Aadhaar is linked to a fraudulent account. Share your Aadhaar number and OTP at https://uidai-kyc.top/ to avoid suspension.",
+    "expected_signals": [
+      "credential_request",
+      "government_impersonation",
+      "suspicious_url"
+    ]
+  },
+  {
+    "id": "IN07",
+    "name": "Legitimate HDFC Alert",
+    "category": "benign",
+    "expected_risk": "LOW",
+    "message": "Your HDFC Bank account statement for October is available in the official HDFC Bank app. Log in through the app to view it. Never share your OTP with anyone.",
+    "expected_signals": []
+  },
+  {
+    "id": "IN08",
+    "name": "Legitimate UPI Receipt",
+    "category": "benign",
+    "expected_risk": "LOW",
+    "message": "You received ₹2,500 from Rahul via UPI. Reference 123456789012. This is a system-generated message; no action is required.",
+    "expected_signals": []
   }
 ]

@@ -154,7 +154,7 @@ def assess_device(snapshot: DeviceSnapshot) -> DeviceAssessment:
         recommendations.append(
             _recommendation(
                 "Allow cookies for this site",
-                "Enable cookies for the TrustScan origin so sign-in and session protection work as designed.",
+                "Enable cookies for the Zorvy origin so sign-in and session protection work as designed.",
             )
         )
 

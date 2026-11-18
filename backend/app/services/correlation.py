@@ -3,7 +3,7 @@ from typing import Any
 
 class EvidenceCorrelation:
     """
-    Correlates multiple TrustScan evidence sources.
+    Correlates multiple Zorvy evidence sources.
 
     This service does not make a criminal determination.
     It identifies relationships between observable indicators
@@ -820,7 +820,7 @@ class EvidenceCorrelation:
         if not evidence_signals:
 
             return (
-                "TrustScan did not identify enough "
+                "Zorvy did not identify enough "
                 "structured evidence to establish "
                 "a meaningful correlation."
             )
@@ -828,7 +828,7 @@ class EvidenceCorrelation:
         if not correlations:
 
             return (
-                "TrustScan identified individual evidence "
+                "Zorvy identified individual evidence "
                 "signals, but no predefined high-confidence "
                 "correlation pattern was established. "
                 "The available evidence should be evaluated "
@@ -842,7 +842,7 @@ class EvidenceCorrelation:
         ]
 
         return (
-            "TrustScan identified "
+            "Zorvy identified "
             f"{len(correlations)} correlated evidence "
             f"pattern(s) with {correlation_level.lower()} "
             "correlation strength. "

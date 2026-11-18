@@ -20,12 +20,12 @@ Environment = Literal["development", "test", "production"]
 class Settings(BaseSettings):
     """Application settings.
 
-    Every value can be overridden with a ``TRUSTSCAN_``-prefixed environment
+    Every value can be overridden with a ``ZORVY_``-prefixed environment
     variable. A root ``.env`` file is loaded for local development.
     """
 
     model_config = SettingsConfigDict(
-        env_prefix="TRUSTSCAN_",
+        env_prefix="ZORVY_",
         env_file=(PROJECT_ROOT / ".env", BACKEND_DIR / ".env"),
         env_file_encoding="utf-8",
         case_sensitive=False,
@@ -36,7 +36,7 @@ class Settings(BaseSettings):
     )
 
     # Application
-    app_name: str = "TrustScan AI"
+    app_name: str = "Zorvy"
     environment: Environment = "development"
     debug: bool = False
     api_v1_prefix: str = "/api/v1"
@@ -58,7 +58,7 @@ class Settings(BaseSettings):
     device_scan_rate_limit_per_minute: int = 30
 
     # Database
-    database_url: str = "postgresql+asyncpg://trustscan:trustscan@localhost:5432/trustscan"
+    database_url: str = "postgresql+asyncpg://zorvy:zorvy@localhost:5432/zorvy"
     database_echo: bool = False
     auto_create_tables: bool = True
 
@@ -147,7 +147,7 @@ class Settings(BaseSettings):
 
     @property
     def refresh_cookie_name(self) -> str:
-        return "trustscan_refresh"
+        return "zorvy_refresh"
 
     @property
     def llm_configured(self) -> bool:

@@ -1,4 +1,4 @@
-"""Initial TrustScan schema.
+"""Initial Zorvy schema.
 
 Revision ID: 0001_initial
 Revises:

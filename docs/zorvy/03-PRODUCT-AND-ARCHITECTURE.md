@@ -28,7 +28,7 @@
 | M5 | **White-label Protection Portal** | Banks, telcos | Not built | 3 |
 | M6 | **Device Exposure Scan** | Consumer + onboarding risk | Shipped | 3 |
 | M7 | **Compliance Evidence Export** | Compliance, audit | Partial (audit log) | 2 |
-| M8 | **Benchmark & Accuracy Report** | All | Harness exists (20-case set) | 1 |
+| M8 | **Benchmark & Accuracy Report** | All | Harness exists (28-case set) | 1 |
 
 ### M1 — Consumer Check
 
@@ -240,7 +240,7 @@ deterministic explanations rather than failing the request or losing money.
 |---|---|
 | Reproduce any verdict | Store `ruleset_version` + `request_hash` + full signal set; re-run is deterministic |
 | Explain a change | Ruleset change log with rationale and affected signal keys; verdict diff tool |
-| Prove accuracy | Labelled benchmark (start from the existing 20-case set, grow to 2,000+), published precision/recall by category |
+| Prove accuracy | Labelled benchmark (start from the existing 28-case set, grow to 2,000+), published precision/recall by category |
 | Detect drift | Weekly benchmark run; alert on >3pp movement in any category |
 | Refuse to guess | `insufficient_evidence` is a valid, common verdict |
 | Audit model use | Log whether the LLM was invoked, which model, and what it changed |

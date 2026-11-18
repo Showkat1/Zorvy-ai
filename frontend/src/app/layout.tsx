@@ -6,12 +6,12 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "TrustScan AI — Verify Before You Trust",
-    template: "%s · TrustScan AI",
+    default: "Zorvy — Verify Before You Trust",
+    template: "%s · Zorvy",
   },
   description:
-    "Evidence-grounded Generative AI that investigates phishing, scams, impersonation and fraud — then explains the risk and tells you what to do next.",
-  applicationName: "TrustScan AI",
+    "India-first, evidence-grounded AI that investigates phishing, scams, impersonation and fraud — then explains the risk and tells you what to do next.",
+  applicationName: "Zorvy",
   icons: {
     icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
   },
@@ -23,9 +23,9 @@ export const metadata: Metadata = {
     "explainable AI",
     "RAG",
   ],
-  authors: [{ name: "TrustScan AI" }],
+  authors: [{ name: "Zorvy" }],
   openGraph: {
-    title: "TrustScan AI — Verify Before You Trust",
+    title: "Zorvy — Verify Before You Trust",
     description:
       "Investigate suspicious messages, links, screenshots and documents with explainable AI risk scoring.",
     type: "website",

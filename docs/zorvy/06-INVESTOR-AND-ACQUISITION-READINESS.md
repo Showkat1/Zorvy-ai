@@ -9,7 +9,7 @@ renegotiation. Five properties:
 | Property | Test | Status today |
 |---|---|---|
 | **Clean ownership** | Every contributor assigned IP; trademark registered in India (class 9/42) | ❌ Not started |
-| **Provable accuracy** | Published benchmark with methodology and known failure modes | ⚠️ 20-case harness exists; not credible yet |
+| **Provable accuracy** | Published benchmark with methodology and known failure modes | ⚠️ 28-case harness exists (8 India-focused); not credible yet |
 | **Provable revenue** | 12 months of contracts, reconciled to bank statements and GST filings | ❌ Pre-revenue |
 | **Contained risk** | No cross-tenant leakage, no unconsented data, no liability gaps | ⚠️ Architecture supports it; policy absent |
 | **Referenceable customers** | Two accounts willing to take a diligence call | ❌ None |
@@ -43,8 +43,9 @@ the pattern corpus is real and compounding. A competitor without a corpus runs n
 - Certificate of incorporation, MOA/AOA, board resolutions
 - Cap table (fully diluted), ESOP scheme, any convertible instruments
 - IP assignment from every founder, employee and contractor
-- **Trademark registration** — verify "TrustScan" availability in India before filing; the mark
-  is descriptive-adjacent and may be in use by other vendors in adjacent classes
+- **Trademark registration** — search and file "Zorvy" in India (classes 9 and 42), and secure
+  the matching `.in` and `.ai` domains. A coined mark is easier to protect than a descriptive
+  one, but availability still has to be checked before filing
 - Open-source licence inventory (confirm no copyleft in shipped code)
 - Customer contracts, DPAs, sub-processor list, SLAs
 

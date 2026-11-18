@@ -70,7 +70,7 @@ function mapPlatform(raw: string | undefined): string | null {
 function probeStorage(kind: "local" | "session"): boolean {
   try {
     const storage = kind === "local" ? window.localStorage : window.sessionStorage;
-    const key = "__trustscan_storage_probe__";
+    const key = "__zorvy_storage_probe__";
     storage.setItem(key, "1");
     storage.removeItem(key);
     return true;
@@ -85,7 +85,7 @@ function probeIndexedDb(): Promise<boolean> {
       resolve(false);
       return;
     }
-    const name = `trustscan-probe-${Date.now()}`;
+    const name = `zorvy-probe-${Date.now()}`;
     try {
       const request = window.indexedDB.open(name, 1);
       request.onsuccess = () => {
@@ -269,7 +269,7 @@ export function collectWebRtc(timeoutMs = 3000): Promise<DeviceWebRtc> {
         const address = extractCandidateAddress(event.candidate.candidate);
         if (address) addresses.add(address);
       };
-      peer.createDataChannel("trustscan-probe");
+      peer.createDataChannel("zorvy-probe");
       void peer
         .createOffer()
         .then((offer) => peer?.setLocalDescription(offer))

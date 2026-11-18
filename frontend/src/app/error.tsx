@@ -26,7 +26,7 @@ export default function GlobalError({
       <div className="space-y-2">
         <h1 className="text-2xl font-semibold tracking-tight">Something went wrong</h1>
         <p className="mx-auto max-w-md text-sm leading-relaxed text-muted">
-          TrustScan hit an unexpected error. You can retry, or return to the dashboard.
+          Zorvy hit an unexpected error. You can retry, or return to the dashboard.
         </p>
         {error.digest ? (
           <p className="font-mono text-[11px] text-faint">Reference: {error.digest}</p>

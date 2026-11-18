@@ -1,25 +1,25 @@
 {
-  "generated_at": "2026-11-18T14:26:14+00:00",
+  "generated_at": "2026-11-18T14:54:54+00:00",
   "metrics": {
-    "cases": 20,
+    "cases": 28,
     "level_accuracy": 1.0,
     "ordinal_accuracy": 1.0,
     "macrolevel_f1": 1.0,
-    "signal_precision": 0.5424,
-    "signal_recall": 0.8205,
-    "signal_f1": 0.6531,
-    "signal_expected": 39,
-    "signal_found": 32,
-    "signal_predicted": 59,
+    "signal_precision": 0.6071,
+    "signal_recall": 0.8793,
+    "signal_f1": 0.7183,
+    "signal_expected": 58,
+    "signal_found": 51,
+    "signal_predicted": 84,
     "dangerous_misses": 0,
     "false_alarms": 0,
-    "latency_mean_ms": 1.241,
-    "latency_p50_ms": 0.588,
-    "latency_p95_ms": 2.699,
-    "latency_max_ms": 8.966,
+    "latency_mean_ms": 0.834,
+    "latency_p50_ms": 0.571,
+    "latency_p95_ms": 3.032,
+    "latency_max_ms": 4.876,
     "confusion": {
       "LOW": {
-        "LOW": 5,
+        "LOW": 7,
         "MEDIUM": 0,
         "HIGH": 0,
         "CRITICAL": 0
@@ -33,14 +33,14 @@
       "HIGH": {
         "LOW": 0,
         "MEDIUM": 0,
-        "HIGH": 12,
+        "HIGH": 16,
         "CRITICAL": 0
       },
       "CRITICAL": {
         "LOW": 0,
         "MEDIUM": 0,
         "HIGH": 0,
-        "CRITICAL": 2
+        "CRITICAL": 4
       }
     },
     "per_level": {
@@ -48,7 +48,7 @@
         "precision": 1.0,
         "recall": 1.0,
         "f1": 1.0,
-        "support": 5
+        "support": 7
       },
       "MEDIUM": {
         "precision": 1.0,
@@ -60,13 +60,13 @@
         "precision": 1.0,
         "recall": 1.0,
         "f1": 1.0,
-        "support": 12
+        "support": 16
       },
       "CRITICAL": {
         "precision": 1.0,
         "recall": 1.0,
         "f1": 1.0,
-        "support": 2
+        "support": 4
       }
     },
     "per_category": {
@@ -77,15 +77,15 @@
         "signal_recall": 0.0
       },
       "benign": {
-        "cases": 4,
+        "cases": 6,
         "level_accuracy": 1.0,
         "signal_expected": 0,
         "signal_recall": 0.0
       },
       "government_impersonation": {
-        "cases": 1,
+        "cases": 2,
         "level_accuracy": 1.0,
-        "signal_expected": 2,
+        "signal_expected": 5,
         "signal_recall": 1.0
       },
       "impersonation": {
@@ -107,15 +107,15 @@
         "signal_recall": 1.0
       },
       "phishing": {
-        "cases": 5,
+        "cases": 8,
         "level_accuracy": 1.0,
-        "signal_expected": 16,
-        "signal_recall": 0.8125
+        "signal_expected": 27,
+        "signal_recall": 0.8889
       },
       "prize_scam": {
-        "cases": 1,
+        "cases": 2,
         "level_accuracy": 1.0,
-        "signal_expected": 3,
+        "signal_expected": 6,
         "signal_recall": 1.0
       },
       "scam": {
@@ -125,9 +125,9 @@
         "signal_recall": 0.5714
       },
       "social_engineering": {
-        "cases": 2,
+        "cases": 3,
         "level_accuracy": 1.0,
-        "signal_expected": 3,
+        "signal_expected": 5,
         "signal_recall": 1.0
       }
     }
@@ -162,7 +162,7 @@
         "url_present"
       ],
       "url_count": 1,
-      "latency_ms": 8.966,
+      "latency_ms": 4.876,
       "level_correct": true
     },
     {
@@ -180,17 +180,15 @@
         "advance_payment",
         "credential_request",
         "government_impersonation",
-        "impersonation",
-        "job_scam"
+        "impersonation"
       ],
       "missing_signals": [],
       "unexpected_signals": [
         "credential_request",
-        "impersonation",
-        "job_scam"
+        "impersonation"
       ],
       "url_count": 0,
-      "latency_ms": 2.699,
+      "latency_ms": 3.032,
       "level_correct": true
     },
     {
@@ -214,7 +212,7 @@
         "prize_scam"
       ],
       "url_count": 0,
-      "latency_ms": 0.861,
+      "latency_ms": 0.755,
       "level_correct": true
     },
     {
@@ -240,7 +238,7 @@
         "social_engineering"
       ],
       "url_count": 0,
-      "latency_ms": 0.628,
+      "latency_ms": 0.431,
       "level_correct": true
     },
     {
@@ -249,7 +247,7 @@
       "category": "prize_scam",
       "expected_level": "HIGH",
       "actual_level": "HIGH",
-      "score": 70,
+      "score": 62,
       "expected_signals": [
         "advance_payment",
         "artificial_urgency",
@@ -258,17 +256,15 @@
       "detected_signals": [
         "advance_payment",
         "artificial_urgency",
-        "job_scam",
         "prize_scam",
         "social_engineering"
       ],
       "missing_signals": [],
       "unexpected_signals": [
-        "job_scam",
         "social_engineering"
       ],
       "url_count": 0,
-      "latency_ms": 0.845,
+      "latency_ms": 0.47,
       "level_correct": true
     },
     {
@@ -295,7 +291,7 @@
         "url_present"
       ],
       "url_count": 1,
-      "latency_ms": 2.681,
+      "latency_ms": 1.386,
       "level_correct": true
     },
     {
@@ -324,7 +320,7 @@
         "url_present"
       ],
       "url_count": 1,
-      "latency_ms": 1.194,
+      "latency_ms": 0.616,
       "level_correct": true
     },
     {
@@ -350,7 +346,7 @@
         "url_present"
       ],
       "url_count": 1,
-      "latency_ms": 0.863,
+      "latency_ms": 0.711,
       "level_correct": true
     },
     {
@@ -376,7 +372,7 @@
         "social_engineering"
       ],
       "url_count": 0,
-      "latency_ms": 0.508,
+      "latency_ms": 0.454,
       "level_correct": true
     },
     {
@@ -405,7 +401,7 @@
         "social_engineering"
       ],
       "url_count": 0,
-      "latency_ms": 0.311,
+      "latency_ms": 0.327,
       "level_correct": true
     },
     {
@@ -424,7 +420,7 @@
       "missing_signals": [],
       "unexpected_signals": [],
       "url_count": 0,
-      "latency_ms": 0.464,
+      "latency_ms": 0.465,
       "level_correct": true
     },
     {
@@ -449,7 +445,7 @@
         "credential_request"
       ],
       "url_count": 0,
-      "latency_ms": 0.559,
+      "latency_ms": 0.557,
       "level_correct": true
     },
     {
@@ -464,7 +460,7 @@
       "missing_signals": [],
       "unexpected_signals": [],
       "url_count": 0,
-      "latency_ms": 0.514,
+      "latency_ms": 0.504,
       "level_correct": true
     },
     {
@@ -479,7 +475,7 @@
       "missing_signals": [],
       "unexpected_signals": [],
       "url_count": 0,
-      "latency_ms": 0.518,
+      "latency_ms": 0.525,
       "level_correct": true
     },
     {
@@ -498,7 +494,7 @@
         "job_scam"
       ],
       "url_count": 0,
-      "latency_ms": 0.505,
+      "latency_ms": 0.515,
       "level_correct": true
     },
     {
@@ -513,7 +509,7 @@
       "missing_signals": [],
       "unexpected_signals": [],
       "url_count": 0,
-      "latency_ms": 0.417,
+      "latency_ms": 0.415,
       "level_correct": true
     },
     {
@@ -537,7 +533,7 @@
       ],
       "unexpected_signals": [],
       "url_count": 0,
-      "latency_ms": 0.464,
+      "latency_ms": 0.455,
       "level_correct": true
     },
     {
@@ -564,7 +560,7 @@
         "social_engineering"
       ],
       "url_count": 0,
-      "latency_ms": 0.474,
+      "latency_ms": 0.409,
       "level_correct": true
     },
     {
@@ -599,7 +595,7 @@
         "url_present"
       ],
       "url_count": 1,
-      "latency_ms": 0.723,
+      "latency_ms": 0.691,
       "level_correct": true
     },
     {
@@ -614,7 +610,198 @@
       "missing_signals": [],
       "unexpected_signals": [],
       "url_count": 0,
-      "latency_ms": 0.617,
+      "latency_ms": 0.58,
+      "level_correct": true
+    },
+    {
+      "id": "IN01",
+      "name": "HDFC KYC Phishing",
+      "category": "phishing",
+      "expected_level": "CRITICAL",
+      "actual_level": "CRITICAL",
+      "score": 100,
+      "expected_signals": [
+        "advance_payment",
+        "artificial_urgency",
+        "credential_request",
+        "impersonation",
+        "suspicious_url"
+      ],
+      "detected_signals": [
+        "advance_payment",
+        "artificial_urgency",
+        "credential_request",
+        "impersonation",
+        "social_engineering",
+        "suspicious_url",
+        "url_present"
+      ],
+      "missing_signals": [],
+      "unexpected_signals": [
+        "social_engineering",
+        "url_present"
+      ],
+      "url_count": 1,
+      "latency_ms": 0.69,
+      "level_correct": true
+    },
+    {
+      "id": "IN02",
+      "name": "SBI Fake Login",
+      "category": "phishing",
+      "expected_level": "HIGH",
+      "actual_level": "HIGH",
+      "score": 100,
+      "expected_signals": [
+        "artificial_urgency",
+        "credential_request",
+        "suspicious_url"
+      ],
+      "detected_signals": [
+        "artificial_urgency",
+        "credential_request",
+        "phishing",
+        "social_engineering",
+        "suspicious_url",
+        "url_present"
+      ],
+      "missing_signals": [],
+      "unexpected_signals": [
+        "phishing",
+        "social_engineering",
+        "url_present"
+      ],
+      "url_count": 1,
+      "latency_ms": 0.676,
+      "level_correct": true
+    },
+    {
+      "id": "IN03",
+      "name": "PhonePe Cashback Scam",
+      "category": "prize_scam",
+      "expected_level": "HIGH",
+      "actual_level": "HIGH",
+      "score": 70,
+      "expected_signals": [
+        "advance_payment",
+        "prize_scam",
+        "suspicious_url"
+      ],
+      "detected_signals": [
+        "advance_payment",
+        "prize_scam",
+        "suspicious_url",
+        "url_present"
+      ],
+      "missing_signals": [],
+      "unexpected_signals": [
+        "url_present"
+      ],
+      "url_count": 1,
+      "latency_ms": 0.723,
+      "level_correct": true
+    },
+    {
+      "id": "IN04",
+      "name": "UPI Collect Request Scam",
+      "category": "social_engineering",
+      "expected_level": "HIGH",
+      "actual_level": "HIGH",
+      "score": 67,
+      "expected_signals": [
+        "advance_payment",
+        "credential_request"
+      ],
+      "detected_signals": [
+        "advance_payment",
+        "credential_request"
+      ],
+      "missing_signals": [],
+      "unexpected_signals": [],
+      "url_count": 0,
+      "latency_ms": 0.478,
+      "level_correct": true
+    },
+    {
+      "id": "IN05",
+      "name": "Fake IRCTC Refund",
+      "category": "phishing",
+      "expected_level": "CRITICAL",
+      "actual_level": "CRITICAL",
+      "score": 100,
+      "expected_signals": [
+        "credential_request",
+        "impersonation",
+        "suspicious_url"
+      ],
+      "detected_signals": [
+        "credential_request",
+        "impersonation",
+        "suspicious_url",
+        "url_present"
+      ],
+      "missing_signals": [],
+      "unexpected_signals": [
+        "url_present"
+      ],
+      "url_count": 1,
+      "latency_ms": 0.835,
+      "level_correct": true
+    },
+    {
+      "id": "IN06",
+      "name": "Fake UIDAI Suspension",
+      "category": "government_impersonation",
+      "expected_level": "HIGH",
+      "actual_level": "HIGH",
+      "score": 89,
+      "expected_signals": [
+        "credential_request",
+        "government_impersonation",
+        "suspicious_url"
+      ],
+      "detected_signals": [
+        "credential_request",
+        "government_impersonation",
+        "suspicious_url",
+        "url_present"
+      ],
+      "missing_signals": [],
+      "unexpected_signals": [
+        "url_present"
+      ],
+      "url_count": 1,
+      "latency_ms": 0.632,
+      "level_correct": true
+    },
+    {
+      "id": "IN07",
+      "name": "Legitimate HDFC Alert",
+      "category": "benign",
+      "expected_level": "LOW",
+      "actual_level": "LOW",
+      "score": 2,
+      "expected_signals": [],
+      "detected_signals": [],
+      "missing_signals": [],
+      "unexpected_signals": [],
+      "url_count": 0,
+      "latency_ms": 0.589,
+      "level_correct": true
+    },
+    {
+      "id": "IN08",
+      "name": "Legitimate UPI Receipt",
+      "category": "benign",
+      "expected_level": "LOW",
+      "actual_level": "LOW",
+      "score": 7,
+      "expected_signals": [],
+      "detected_signals": [],
+      "missing_signals": [],
+      "unexpected_signals": [],
+      "url_count": 0,
+      "latency_ms": 0.561,
       "level_correct": true
     }
   ]

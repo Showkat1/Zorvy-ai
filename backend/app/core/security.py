@@ -41,7 +41,7 @@ def create_access_token(subject: str, *, role: str = "user") -> tuple[str, datet
         "iat": int(now.timestamp()),
         "exp": int(expires_at.timestamp()),
         "jti": uuid.uuid4().hex,
-        "iss": "trustscan",
+        "iss": "zorvy",
     }
     token = jwt.encode(payload, settings.secret_key, algorithm="HS256")
     return token, expires_at
@@ -67,7 +67,7 @@ def decode_access_token(token: str) -> dict[str, Any]:
             token,
             settings.secret_key,
             algorithms=["HS256"],
-            issuer="trustscan",
+            issuer="zorvy",
             options={"require": ["exp", "sub", "type"]},
         )
     except jwt.PyJWTError as exc:  # pragma: no cover - depends on library version

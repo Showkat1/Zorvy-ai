@@ -168,7 +168,7 @@ export default function InvestigationReportPage() {
       const objectUrl = URL.createObjectURL(blob);
       const anchor = document.createElement("a");
       anchor.href = objectUrl;
-      anchor.download = `trustscan-${investigationId}.json`;
+      anchor.download = `zorvy-${investigationId}.json`;
       anchor.click();
       URL.revokeObjectURL(objectUrl);
       toast.success("Report exported");
@@ -737,7 +737,7 @@ export default function InvestigationReportPage() {
                 <CardContent className="flex items-start gap-3 p-4">
                   <AlertTriangle className="mt-0.5 size-4 shrink-0 text-amber-300" />
                   <p className="text-[11px] leading-relaxed text-amber-100/80">
-                    TrustScan provides evidence-based risk intelligence. A high score means the
+                    Zorvy provides evidence-based risk intelligence. A high score means the
                     communication warrants verification and caution — it is not proof that a
                     person, organization, phone number or URL is fraudulent.
                   </p>

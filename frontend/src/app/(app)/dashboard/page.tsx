@@ -235,7 +235,7 @@ export default function DashboardPage() {
             <EmptyState
               icon={<Sparkles className="size-5" />}
               title="No investigations yet"
-              description="Paste a suspicious message, drop a link, or upload a screenshot to see TrustScan in action."
+              description="Paste a suspicious message, drop a link, or upload a screenshot to see Zorvy in action."
               action={
                 <Button asChild size="sm">
                   <Link href="/investigate">

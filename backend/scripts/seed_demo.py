@@ -11,8 +11,8 @@ from app.services.pipeline import pipeline
 from app.services.rag import knowledge_base
 from sqlalchemy import func, select
 
-DEMO_EMAIL = "demo@trustscan.ai"
-DEMO_PASSWORD = "TrustScanDemo123"
+DEMO_EMAIL = "demo@zorvy.ai"
+DEMO_PASSWORD = "ZorvyDemo123"
 
 SAMPLES = [
     (
@@ -43,7 +43,7 @@ async def main() -> None:
         if user is None:
             user = User(
                 email=DEMO_EMAIL,
-                full_name="TrustScan Demo",
+                full_name="Zorvy Demo",
                 password_hash=hash_password(DEMO_PASSWORD),
                 last_login_at=datetime.now(UTC),
             )

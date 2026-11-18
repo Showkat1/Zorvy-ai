@@ -1,4 +1,4 @@
-SOURCE: TrustScan Cybersecurity Knowledge Base
+SOURCE: Zorvy Cybersecurity Knowledge Base
 
 TITLE: Phishing and Social Engineering Indicators
 

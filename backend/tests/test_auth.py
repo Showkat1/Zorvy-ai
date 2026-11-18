@@ -9,7 +9,7 @@ def test_register_me_and_login(client: TestClient, user_credentials: dict[str, s
     payload = register.json()
     assert payload["token_type"] == "bearer"
     assert payload["user"]["email"] == user_credentials["email"]
-    assert "trustscan_refresh" in register.cookies
+    assert "zorvy_refresh" in register.cookies
 
     headers = {"Authorization": f"Bearer {payload['access_token']}"}
     me = client.get("/api/v1/auth/me", headers=headers)
@@ -38,12 +38,12 @@ def test_duplicate_registration(client: TestClient, user_credentials: dict[str, 
 def test_refresh_rotation_and_logout(client: TestClient, user_credentials: dict[str, str]) -> None:
     register = client.post("/api/v1/auth/register", json=user_credentials)
     assert register.status_code == 201
-    first_refresh = register.cookies.get("trustscan_refresh")
+    first_refresh = register.cookies.get("zorvy_refresh")
 
     refreshed = client.post("/api/v1/auth/refresh")
     assert refreshed.status_code == 200, refreshed.text
     assert refreshed.json()["access_token"]
-    second_refresh = refreshed.cookies.get("trustscan_refresh")
+    second_refresh = refreshed.cookies.get("zorvy_refresh")
     assert second_refresh and second_refresh != first_refresh
 
     assert client.post("/api/v1/auth/logout").status_code == 204

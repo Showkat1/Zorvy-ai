@@ -7,7 +7,7 @@ from app.schemas.domain import RiskAssessment as RiskResult
 
 class RiskEngine:
     """
-    Explainable risk engine for TrustScan AI.
+    Explainable risk engine for Zorvy.
 
     Design principles
     -----------------
@@ -478,7 +478,7 @@ class RiskEngine:
         evidence: Optional[Dict[str, Any]] = None,
     ) -> RiskResult:
         """
-        Calculate TrustScan risk score.
+        Calculate Zorvy risk score.
         """
 
         normalized = cls._normalize_signals(

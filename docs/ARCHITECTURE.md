@@ -1,6 +1,6 @@
 # Architecture
 
-This document describes how the TrustScan AI platform is put together: request flow, data model,
+This document describes how the Zorvy platform is put together: request flow, data model,
 the investigation pipeline, the RAG and risk subsystems, and the frontend. It complements the
 root [README](../README.md).
 
@@ -8,7 +8,7 @@ root [README](../README.md).
 
 ## 1. System context
 
-TrustScan is a two-service application plus a database:
+Zorvy is a two-service application plus a database:
 
 | Component | Responsibility |
 | --- | --- |
@@ -40,7 +40,7 @@ app/
 │   ├── knowledge.py   Documents, semantic search, reindex
 │   └── system.py      /health, /health/ready, /meta
 ├── core/
-│   ├── config.py      Pydantic settings (TRUSTSCAN_* env prefix)
+│   ├── config.py      Pydantic settings (ZORVY_* env prefix)
 │   ├── db.py          Async engine/session, Base, init_models
 │   ├── security.py    Argon2 hashing, JWT encode/decode, token helpers
 │   ├── logging.py     structlog configuration
@@ -95,7 +95,7 @@ queries avoid parsing report JSON.
 ### Migrations
 
 Alembic owns the schema. The initial migration enables `CREATE EXTENSION IF NOT EXISTS vector`,
-creates the tables, indexes and the embedding column. `TRUSTSCAN_AUTO_CREATE_TABLES` exists for
+creates the tables, indexes and the embedding column. `ZORVY_AUTO_CREATE_TABLES` exists for
 local/demo convenience; production deployments run `alembic upgrade head` (the API container does
 this before starting Uvicorn).
 
@@ -149,7 +149,7 @@ human-readable `detail`; the report stores the resulting list.
 
 Failures mark the investigation `failed`, persist `error_message`, and remain retryable through
 `POST /investigations/{id}/retry`. Pipeline execution is bounded by
-`TRUSTSCAN_PIPELINE_TIMEOUT_SECONDS`.
+`ZORVY_PIPELINE_TIMEOUT_SECONDS`.
 
 ### Analysis fallback
 
@@ -171,7 +171,7 @@ always complete; degraded analysis is disclosed rather than hidden.
    - `sentence-transformers` — local model;
    - `hash` — deterministic feature hashing, no network, used by default and in CI.
 4. **Search** — pgvector cosine distance in PostgreSQL; in-process cosine similarity on SQLite.
-   Results below `TRUSTSCAN_RAG_MIN_SCORE` are discarded, and the top `TRUSTSCAN_RAG_TOP_K` passages
+   Results below `ZORVY_RAG_MIN_SCORE` are discarded, and the top `ZORVY_RAG_TOP_K` passages
    are attached to the report with source metadata and relevance.
 
 Retrieved passages are passed to the analysis stage and surfaced in the UI, so conclusions can be
@@ -197,7 +197,7 @@ The engine is deliberately deterministic so the same evidence always produces th
 5. **Banding** — LOW (0–24), MEDIUM (25–49), HIGH (50–79), CRITICAL (80–100).
 6. **Explanation** — generated from the signals that actually contributed, not a generic template.
 
-The 20-case evaluation dataset in `data/test_cases/` asserts expected bands and is part of the test
+The 28-case evaluation dataset in `data/test_cases/` asserts expected bands and is part of the test
 suite, guarding against scoring regressions.
 
 ---
@@ -283,7 +283,7 @@ throughout.
 | Database integrity conflict | `409` conflict envelope. |
 | Expired access token | Client refreshes once and retries; otherwise redirects to sign-in. |
 
-Logging is structured (structlog). Containers emit JSON (`TRUSTSCAN_LOG_JSON=true`) with request IDs
+Logging is structured (structlog). Containers emit JSON (`ZORVY_LOG_JSON=true`) with request IDs
 and durations. `/health` is a liveness probe; `/health/ready` verifies the database. Both are used
 by Docker Compose health checks and are safe for orchestrators.
 
@@ -296,7 +296,7 @@ by Docker Compose health checks and are safe for orchestrators.
   the pipeline service is already isolated from the HTTP layer.
 - **Uploads** are local by default; swap `services/storage.py` for S3-compatible object storage.
 - **Embeddings** can be upgraded per deployment without schema changes by keeping
-  `TRUSTSCAN_EMBEDDING_DIM` in sync with the vector column.
+  `ZORVY_EMBEDDING_DIM` in sync with the vector column.
 - **Knowledge base** can be extended by dropping documents into `data/knowledge_base/` and calling
   `POST /knowledge/reindex`.
 - **Analysis** can be swapped by implementing the structured contract in `services/llm.py`; the
@@ -308,7 +308,7 @@ by Docker Compose health checks and are safe for orchestrators.
 
 - **Backend** — pytest with an isolated SQLite database, inline pipeline, hash embeddings and rate
   limiting disabled. Coverage includes auth/session rotation, ownership checks, investigation
-  lifecycle, extraction, URL intelligence, correlation, risk gating, and the 20-case evaluation
+  lifecycle, extraction, URL intelligence, correlation, risk gating, and the 28-case evaluation
   dataset.
 - **Frontend** — ESLint (Next core-web-vitals + TypeScript), `tsc --noEmit`, and a production
   `next build`. Lint rules include React 19's `set-state-in-effect`, so state is derived during

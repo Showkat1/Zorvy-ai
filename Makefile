@@ -1,7 +1,7 @@
 .DEFAULT_GOAL := help
 
 # ---------------------------------------------------------------------------
-# TrustScan AI — developer commands
+# Zorvy — developer commands
 # ---------------------------------------------------------------------------
 
 .PHONY: help install dev-api dev-web test lint format typecheck build \
@@ -25,7 +25,7 @@ test: ## Run backend tests
 	cd backend && uv run pytest -q
 
 benchmark: ## Run the deterministic accuracy benchmark and refresh the report
-	cd backend && uv run python -m scripts.benchmark --markdown ../docs/trustscan/BENCHMARK-REPORT.md
+	cd backend && uv run python -m scripts.benchmark --markdown ../docs/zorvy/BENCHMARK-REPORT.md
 
 lint: ## Lint backend and frontend
 	cd backend && uv run ruff check app tests scripts

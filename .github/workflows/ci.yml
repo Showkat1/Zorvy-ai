@@ -37,11 +37,11 @@ jobs:
       - name: Tests
         run: uv run pytest -q
         env:
-          TRUSTSCAN_ENVIRONMENT: test
-          TRUSTSCAN_PIPELINE_MODE: inline
-          TRUSTSCAN_RATE_LIMIT_ENABLED: "false"
-          TRUSTSCAN_LLM_ENABLED: "false"
-          TRUSTSCAN_EMBEDDING_PROVIDER: hash
+          ZORVY_ENVIRONMENT: test
+          ZORVY_PIPELINE_MODE: inline
+          ZORVY_RATE_LIMIT_ENABLED: "false"
+          ZORVY_LLM_ENABLED: "false"
+          ZORVY_EMBEDDING_PROVIDER: hash
 
       - name: Benchmark
         run: uv run python -m scripts.benchmark --json "$RUNNER_TEMP/benchmark-results.json"

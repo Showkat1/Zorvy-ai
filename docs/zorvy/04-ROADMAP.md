@@ -38,10 +38,11 @@ cheapest insurance in the plan.
    [02](02-MARKET-AND-COMPETITION.md) is wrong.
 2. **15 discovery calls** with Head of Fraud Risk / CISO / Head of Digital across PAs, fintechs,
    SFBs and one private bank.
-3. **Benchmark v1.** Expand the existing evaluation set from 20 cases to 300 hand-labelled
-   Indian cases (SMS, WhatsApp, email, screenshots, UPI collect-request scams, fake customer
-   care, KYC-update, electricity-bill, part-time-job, digital-arrest). Publish precision,
-   recall and failure modes.
+3. **Benchmark v1.** Expand the existing evaluation set from 28 cases (20 legacy South Asian,
+   8 India-focused) to 300 hand-labelled Indian cases (SMS, WhatsApp, email, screenshots, UPI
+   collect-request scams, fake customer care, KYC-update, electricity-bill, part-time-job,
+   digital-arrest, and Hindi/Tamil/Bengali variants). Publish precision, recall and failure
+   modes.
 4. **Pilot offer.** 8 weeks, ₹4L, fixed scope, one integration, success criteria agreed in
    writing. A paid pilot is the only discovery output that counts.
 5. **Reality check on certifications.** Get two quotes for ISO 27001 and VAPT so Phase 3
@@ -70,7 +71,7 @@ of the pilot that proves the engine.
 | WhatsApp forward-to-check bot | New (BSP integration) | 3 weeks |
 | Verdict store + indicator cache | New | 2 weeks |
 | Indian signal set (UPI handles, fake customer-care numbers, KYC/BEC patterns, Hinglish normalisation) | `url_intelligence`, `evidence_extractor` | 4 weeks |
-| Benchmark harness in CI | Existing 20-case test | 2 weeks |
+| Benchmark harness in CI | Existing 28-case test | 2 weeks |
 | Pilot integration support | — | ongoing |
 
 **Design decision:** the API contract is frozen at the end of this phase. Changing it after a

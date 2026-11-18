@@ -27,10 +27,10 @@ FROM python:3.14-slim AS runtime
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PATH="/app/.venv/bin:$PATH" \
-    TRUSTSCAN_ENVIRONMENT=production \
-    TRUSTSCAN_UPLOAD_DIR=/data/uploads \
-    TRUSTSCAN_KNOWLEDGE_DIR=/data/knowledge_base \
-    TRUSTSCAN_AUTO_CREATE_TABLES=false
+    ZORVY_ENVIRONMENT=production \
+    ZORVY_UPLOAD_DIR=/data/uploads \
+    ZORVY_KNOWLEDGE_DIR=/data/knowledge_base \
+    ZORVY_AUTO_CREATE_TABLES=false
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -39,15 +39,15 @@ RUN apt-get update \
         libglib2.0-0 \
     && rm -rf /var/lib/apt/lists/*
 
-RUN useradd --create-home --uid 1001 trustscan \
+RUN useradd --create-home --uid 1001 zorvy \
     && mkdir -p /data/uploads /data/knowledge_base \
-    && chown -R trustscan:trustscan /data
+    && chown -R zorvy:zorvy /data
 
 WORKDIR /app
 
-COPY --from=builder --chown=trustscan:trustscan /app /app
+COPY --from=builder --chown=zorvy:zorvy /app /app
 
-USER trustscan
+USER zorvy
 
 EXPOSE 8000
 

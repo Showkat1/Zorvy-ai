@@ -137,7 +137,7 @@ class InvestigationPipeline:
 
                 # 5. Generative analysis (or deterministic fallback)
                 stage_start = time.perf_counter()
-                await self._stage(session, investigation, 4, "Investigating with TrustScan AI")
+                await self._stage(session, investigation, 4, "Investigating with Zorvy")
                 outcome = await investigator.analyze(text, extracted, sources)
                 analysis = outcome.analysis
                 notes.extend(outcome.notes)

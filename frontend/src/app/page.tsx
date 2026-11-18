@@ -77,7 +77,7 @@ export default function LandingPage() {
 
       <header className="sticky top-0 z-40 border-b border-white/5 bg-background/70 backdrop-blur-xl">
         <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-5">
-          <Link href="/" aria-label="TrustScan AI home">
+          <Link href="/" aria-label="Zorvy home">
             <Logo />
           </Link>
           <nav className="hidden items-center gap-8 text-sm text-muted md:flex">
@@ -110,7 +110,7 @@ export default function LandingPage() {
           <div className="animate-rise">
             <Badge tone="teal" className="mb-6">
               <Sparkles className="size-3" />
-              Generative AI · Digital Trust & Fraud Intelligence
+              India-first · Digital Trust & Fraud Intelligence
             </Badge>
             <h1 className="text-balance text-5xl font-semibold leading-[1.04] tracking-tight sm:text-6xl">
               Verify before
@@ -118,9 +118,9 @@ export default function LandingPage() {
               <span className="text-gradient">you trust.</span>
             </h1>
             <p className="mt-6 max-w-xl text-pretty text-base leading-relaxed text-muted sm:text-lg">
-              TrustScan AI investigates suspicious messages, links, screenshots and documents.
-              It verifies claims, correlates evidence, explains the risk, and tells you exactly
-              what to do next.
+              Zorvy investigates suspicious messages, links, screenshots and documents —
+              India-first, with a brand registry that travels. It verifies claims, correlates
+              evidence, explains the risk, and tells you exactly what to do next.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <Button asChild size="lg">
@@ -217,7 +217,7 @@ export default function LandingPage() {
               },
               {
                 title: "The approach",
-                copy: "TrustScan investigates: extract observable evidence, retrieve trusted guidance, correlate independent signals, then score risk.",
+                copy: "Zorvy investigates: extract observable evidence, retrieve trusted guidance, correlate independent signals, then score risk.",
               },
               {
                 title: "The promise",
@@ -344,7 +344,7 @@ export default function LandingPage() {
                 Got a suspicious message?
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-muted">
-                Paste it, drop a link, upload a screenshot. TrustScan returns a full report in
+                Paste it, drop a link, upload a screenshot. Zorvy returns a full report in
                 seconds — with the evidence, the reasoning and the next step.
               </p>
               <div className="mt-7 flex flex-wrap gap-3">
@@ -381,7 +381,7 @@ export default function LandingPage() {
             <a href="/docs" className="pointer-events-none opacity-60">
               API docs
             </a>
-            <span className="text-faint">© {new Date().getFullYear()} TrustScan AI</span>
+            <span className="text-faint">© {new Date().getFullYear()} Zorvy</span>
           </div>
         </div>
       </footer>

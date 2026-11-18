@@ -133,7 +133,7 @@ export default function InvestigatePage() {
       <div className="max-w-2xl">
         <p className="text-xs uppercase tracking-[0.2em] text-teal-300">New investigation</p>
         <h1 className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">
-          What should TrustScan investigate?
+          What should Zorvy investigate?
         </h1>
         <p className="mt-1.5 text-sm leading-relaxed text-muted">
           Submit the suspicious communication exactly as you received it. The more context you
@@ -229,7 +229,7 @@ export default function InvestigatePage() {
                     />
                   </div>
                   <p className="text-[11px] leading-relaxed text-faint">
-                    TrustScan analyses URL structure, look-alike domains, shorteners and
+                    Zorvy analyses URL structure, look-alike domains, shorteners and
                     obfuscation. It does not visit or execute the link.
                   </p>
                 </div>
@@ -315,7 +315,7 @@ export default function InvestigatePage() {
                 Responsible use
               </Badge>
               <p className="mt-3 text-[11px] leading-relaxed text-muted">
-                TrustScan produces evidence-based risk intelligence. A high score is a reason to
+                Zorvy produces evidence-based risk intelligence. A high score is a reason to
                 verify and pause — not proof that a person or organization committed a crime.
               </p>
             </CardContent>

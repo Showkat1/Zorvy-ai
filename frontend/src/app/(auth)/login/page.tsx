@@ -112,7 +112,7 @@ export default function LoginPage() {
       </form>
 
       <p className="mt-6 text-center text-sm text-muted">
-        New to TrustScan?{" "}
+        New to Zorvy?{" "}
         <Link href="/register" className="font-medium text-teal-300 hover:text-teal-200">
           Create an account
         </Link>

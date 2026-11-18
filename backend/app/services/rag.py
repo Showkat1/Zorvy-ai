@@ -42,7 +42,7 @@ def chunk_text(text: str, *, chunk_words: int = 180, overlap: int = 40) -> list[
 def _parse_document(path: Path) -> tuple[str, str, str]:
     raw = path.read_text(encoding="utf-8", errors="replace")
     title = path.stem.replace("_", " ").title()
-    source_label = "TrustScan Knowledge Base"
+    source_label = "Zorvy Knowledge Base"
     for line in raw.splitlines()[:8]:
         if line.upper().startswith("TITLE:"):
             title = line.split(":", 1)[1].strip()

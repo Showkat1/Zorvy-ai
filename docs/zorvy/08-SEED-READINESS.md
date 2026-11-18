@@ -11,13 +11,13 @@ find the gaps anyway; finding them stated with a plan is a signal, not a weaknes
 
 ## 1. The honest position
 
-TrustScan is **technically credible and commercially unproven**.
+Zorvy is **technically credible and commercially unproven**.
 
 | Question an investor asks | Answer today | Verdict |
 |---|---|---|
-| Does the product exist and work? | Yes — FastAPI + Next.js application, 8-stage pipeline, 46 backend tests, CI, Docker | **Strong** |
+| Does the product exist and work? | Yes — FastAPI + Next.js application, 8-stage pipeline, 51 backend tests, CI, Docker | **Strong** |
 | Is the intelligence defensible? | Deterministic, explanation-first engine with an India-first brand registry, no LLM required | **Strong for a seed-stage story** |
-| Can accuracy be verified? | Deterministic benchmark harness and a generated report over 20 labelled cases | **Started, not sufficient** |
+| Can accuracy be verified? | Deterministic benchmark harness and a generated report over 28 labelled cases, 8 of them India-focused | **Started, not sufficient** |
 | Is the IP protected? | Proprietary licence, no copyleft in shipped code, security disclosure policy | **Partial** |
 | Is anyone paying? | No | **Missing** |
 | Is there a design partner? | No | **Missing** |
@@ -34,8 +34,8 @@ and clean ownership**. Everything in §6 is founder work, not engineering work.
 |---|---|---|
 | Benchmark harness | `backend/scripts/benchmark.py` | Accuracy, confusion, signal detection and latency are reproducible on any machine |
 | Benchmark report | [`BENCHMARK-REPORT.md`](BENCHMARK-REPORT.md) | The current numbers, the method, and the limits, in one page |
-| Machine-readable results | `docs/trustscan/benchmark-results.json` | Per-case verdicts for a technical reviewer to inspect |
-| Test suite | `backend/tests/` | 46 tests covering auth, isolation, extraction, URL intelligence, risk gating and the evaluation set |
+| Machine-readable results | `docs/zorvy/benchmark-results.json` | Per-case verdicts for a technical reviewer to inspect |
+| Test suite | `backend/tests/` | 51 tests covering auth, isolation, extraction, Indian formats, URL intelligence, risk gating and the evaluation set |
 | CI | `.github/workflows/ci.yml` | Lint, tests, frontend typecheck/build and Docker builds on every push |
 | Proprietary licence | [`LICENSE`](../../LICENSE) | The engine is not forkable; no implied evaluation rights |
 | Licence hygiene | `backend/pyproject.toml` | The AGPL PDF library (PyMuPDF) was replaced with BSD-licensed `pypdf`; shipping runtime dependencies are permissive |
@@ -64,10 +64,10 @@ does not exist.
 |---|---|---|---|
 | Problem clarity | 🟢 | Strategy set [`01`](01-MASTER-THESIS.md)–[`07`](07-RISK-REGISTER.md) | — |
 | Product completeness | 🟢 | Working app, 8 persisted stages, audit trail | — |
-| Engineering quality | 🟢 | 46 tests, ruff clean, CI, Docker, typed schemas | Add coverage reporting |
+| Engineering quality | 🟢 | 51 tests, ruff clean, CI, Docker, typed schemas | Add coverage reporting |
 | Technical differentiation | 🟢 | Deterministic explainable engine, claim verification, India-first brand registry | Publish the ruleset versioning approach |
-| Accuracy evidence | 🟡 | 20-case benchmark, 100% level accuracy, 82% signal recall | External labelled set, inter-annotator agreement, per-category precision/recall on real reports |
-| India-first depth | 🟡 | 57 Indian brands, Indian suffixes, INR support | Indian-language cases (Hindi, Marathi, Tamil, Bengali), Indian institution corpus |
+| Accuracy evidence | 🟡 | 28-case benchmark, 100% level accuracy, 87.9% signal recall, F1 0.718 | External labelled set, inter-annotator agreement, per-category precision/recall on real reports |
+| India-first depth | 🟡 | 57 Indian brands, Indian suffixes, INR/`₹`, `+91` phones, Indian institution extraction, 8 India-focused cases | Indian-language cases (Hindi, Marathi, Tamil, Bengali), larger Indian institution corpus, regional-language registry |
 | Security posture | 🟡 | Rotation, rate limiting, isolation, disclosure policy | VAPT report, dependency scanning, secret scanning, threat model |
 | Legal hygiene | 🟡 | Proprietary licence; shipping runtime dependencies are permissive (AGPL PDF library replaced) | Trademark search/filing, IP assignment, privacy policy, DPA template; drop the AGPL `legacy/streamlit` tree before sharing source |
 | Commercial proof | 🔴 | None | 1–2 paid pilots or signed LOIs |
@@ -83,22 +83,26 @@ on traction — which is a legitimate pre-seed conversation, not a seed one.
 
 ## 4. The benchmark, stated correctly
 
-The current harness reports **100% risk-level accuracy on 20 hand-written cases**, with zero
+The current harness reports **100% risk-level accuracy on 28 hand-written cases**, with zero
 dangerous misses and zero false alarms. That number is real but narrow:
 
 - **It is not field accuracy.** No real customer traffic, no adversarial distribution, no
   temporal split.
 - **The labels are the author's own.** There is no second annotator and no disagreement analysis.
-- **The corpus is Pakistan-flavoured.** PKR, CNIC and HBL dominate; India-first coverage exists
-  in the registry but not yet in the labelled cases.
-- **Signal recall is 82%, not 100%.** Six expected signals are missed, mostly implicit
-  (`impersonation`, `artificial_urgency`, `credential_request`). Verdict bands happen to
-  absorb those misses; a stricter evaluation would not.
+- **The corpus is mixed, not India-complete.** 20 cases are Pakistan-flavoured (PKR, CNIC, HBL)
+  and 8 are India-focused (UPI, Aadhaar, HDFC/SBI/PhonePe, `₹`). There are no Indian-language
+  cases yet, and 8 cases cannot substantiate an India-first accuracy claim on their own.
+- **Signal recall is 87.9% and signal precision is 60.7% (F1 0.718), not 100%.** The engine
+  over-reports some signals and still misses implicit ones (`impersonation`,
+  `artificial_urgency`). Verdict bands happen to absorb those misses; a stricter evaluation
+  would not.
 
 The defensible claim is:
 
-> On a deterministic 20-case labelled suite, the engine reproduces every expected verdict band,
-> with an in-process p95 of a few milliseconds and no LLM or network dependency.
+> On a deterministic 28-case labelled suite — 20 legacy South Asian cases and 8 India-focused
+> cases — the engine reproduces every expected verdict band, with an in-process p95 of a few
+> milliseconds and no LLM or network dependency. Signal-level recall is 87.9% at 60.7%
+> precision.
 
 That is a statement about **specification conformance**, not about the world.
 
@@ -137,7 +141,7 @@ These cannot be closed by another commit, and each one is a standard diligence r
 | 1 | Corporate entity | Investors invest in a company, not a repository | Incorporate (India Pvt Ltd) or confirm the existing entity |
 | 2 | Cap table and ESOP | Ownership must be unambiguous | Clean, fully diluted sheet with vesting |
 | 3 | IP assignment | Contributor code without assignment is a diligence fail | Assign from every founder and contractor, including past work |
-| 4 | Trademark | "TrustScan" is descriptive-adjacent and may collide in class 9/42 | Search, then file in India |
+| 4 | Trademark | A coined name is easier to protect, but it is unregistered | Search, then file "Zorvy" in India (classes 9/42) and secure the domains |
 | 5 | Privacy policy and DPA | Fraud reports contain personal data | DPDP-aligned policy, retention schedule, sub-processor list |
 | 6 | Penetration test | Banks and investors ask for a VAPT report | Scope the API, auth and upload paths |
 | 7 | Design partners | No amount of code substitutes for a buyer | 10 conversations, 2 LOIs, 1 paid pilot |
@@ -154,7 +158,7 @@ the vehicle is not.
 
 | Do not say | Say instead |
 |---|---|
-| "100% accurate" | "Reproduces every expected verdict on a 20-case labelled suite; field accuracy is not yet measured" |
+| "100% accurate" | "Reproduces every expected verdict on a 28-case labelled suite; field accuracy is not yet measured" |
 | "Detects all Indian fraud" | "Covers 57 Indian brands and Indian domain suffixes; language and institution coverage is expanding" |
 | "AI-powered" as the headline | "Deterministic, explainable engine that works without an LLM" — that is the differentiator for regulated buyers |
 | "Bank-grade security" | "Session rotation, rate limiting, tenant isolation and a disclosure policy; VAPT pending" |

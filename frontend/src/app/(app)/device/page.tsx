@@ -97,7 +97,7 @@ export default function DeviceScanPage() {
           Inspect this browser
         </h1>
         <p className="max-w-2xl text-sm text-muted">
-          Check how much this browser exposes about you and your device. TrustScan scores the
+          Check how much this browser exposes about you and your device. Zorvy scores the
           results deterministically and keeps a history so you can compare later.
         </p>
       </div>
@@ -149,7 +149,7 @@ export default function DeviceScanPage() {
             What is stored: the derived score, the checklist results, and a small metrics snapshot
             (platform, browser, screen size, permissions and WebRTC address counts). Raw addresses
             are saved with your own scan so you can see what leaked. The WebRTC probe contacts a STUN
-            server to discover which addresses your browser exposes. TrustScan never receives your
+            server to discover which addresses your browser exposes. Zorvy never receives your
             browsing history or page contents.
           </p>
         </div>

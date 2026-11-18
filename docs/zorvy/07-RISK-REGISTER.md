@@ -17,7 +17,7 @@ Scored L × I, 1–5. L×I ≥ 12 is board-level.
 | **R9** | **Global vendor localises India** — Featurespace/Feedzai ship Indian content | 2 | 4 | 8 | Speed, local language, and price point; win the fintech segment first | A global vendor announcement naming India |
 | **R10** | **Model cost or policy shock** | 2 | 3 | 6 | Deterministic core; caching; model-agnostic routing; air-gapped mode | Inference cost > 15% of revenue |
 | **R11** | **Founder is the entire sales team** | 4 | 3 | 12 | Second seller or channel by month 10; documented playbook | Pipeline stalls during any founder absence |
-| **R12** | **Trademark conflict on "TrustScan"** | 3 | 3 | 9 | Search class 9/42 in India before filing; fallback marks prepared | Search returns a live mark in the same class |
+| **R12** | **Trademark conflict on "Zorvy"** | 3 | 3 | 9 | Search class 9/42 in India before filing; fallback marks prepared | Search returns a live mark in the same class |
 | **R13** | **Regulatory change restricts data sharing or cross-tenant aggregation** | 2 | 4 | 8 | Aggregate-only architecture; legal review of DPDP rules as notified | Draft rules limiting cross-entity sharing |
 | **R14** | **Client concentration** — one account > 30% of ARR | 3 | 3 | 9 | Cap concentration in the plan; diversify before buyer outreach | Any single account > 30% |
 | **R15** | **WhatsApp platform policy change** — BSP restrictions on forwarded-content processing | 3 | 3 | 9 | Multi-channel from day one (web, SMS, Telegram); bot is a channel, not the product | Any policy notice from the BSP |

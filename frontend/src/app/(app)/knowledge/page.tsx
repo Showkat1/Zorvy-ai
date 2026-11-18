@@ -86,7 +86,7 @@ export default function KnowledgePage() {
             Trusted-source retrieval
           </h1>
           <p className="mt-1.5 max-w-2xl text-sm leading-relaxed text-muted">
-            TrustScan grounds its investigation in a curated cybersecurity knowledge base. Search
+            Zorvy grounds its investigation in a curated cybersecurity knowledge base. Search
             it semantically or inspect what the RAG pipeline can retrieve.
           </p>
         </div>

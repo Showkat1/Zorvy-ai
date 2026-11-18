@@ -6,23 +6,23 @@ from pathlib import Path
 
 import pytest
 
-TEST_DB = Path(__file__).resolve().parent / "test_trustscan.db"
+TEST_DB = Path(__file__).resolve().parent / "test_zorvy.db"
 if TEST_DB.exists():
     TEST_DB.unlink()
 
 os.environ.update(
     {
-        "TRUSTSCAN_ENVIRONMENT": "test",
-        "TRUSTSCAN_DATABASE_URL": f"sqlite+aiosqlite:///{TEST_DB.as_posix()}",
-        "TRUSTSCAN_AUTO_CREATE_TABLES": "true",
-        "TRUSTSCAN_SEED_KNOWLEDGE_ON_STARTUP": "true",
-        "TRUSTSCAN_PIPELINE_MODE": "inline",
-        "TRUSTSCAN_RATE_LIMIT_ENABLED": "false",
-        "TRUSTSCAN_SECRET_KEY": "test-secret-key-not-for-production",
-        "TRUSTSCAN_LLM_ENABLED": "false",
-        "TRUSTSCAN_EMBEDDING_PROVIDER": "hash",
-        "TRUSTSCAN_COOKIE_SECURE": "false",
-        "TRUSTSCAN_LOG_LEVEL": "WARNING",
+        "ZORVY_ENVIRONMENT": "test",
+        "ZORVY_DATABASE_URL": f"sqlite+aiosqlite:///{TEST_DB.as_posix()}",
+        "ZORVY_AUTO_CREATE_TABLES": "true",
+        "ZORVY_SEED_KNOWLEDGE_ON_STARTUP": "true",
+        "ZORVY_PIPELINE_MODE": "inline",
+        "ZORVY_RATE_LIMIT_ENABLED": "false",
+        "ZORVY_SECRET_KEY": "test-secret-key-not-for-production",
+        "ZORVY_LLM_ENABLED": "false",
+        "ZORVY_EMBEDDING_PROVIDER": "hash",
+        "ZORVY_COOKIE_SECURE": "false",
+        "ZORVY_LOG_LEVEL": "WARNING",
     }
 )
 
